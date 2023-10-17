@@ -7,6 +7,7 @@ def find_colors_not_in_second_list(color_list_1: set[str], color_list_2: set[str
 
 
 count_color_lists = 2
-list_1, list_2 = (set(input().split(',')) for _ in range(count_color_lists))
+text_message = 'Enter comma separated colors for the list_'
+list_1, list_2 = (set(input(f'{text_message}{i + 1}: ').replace(' ', '').split(',')) for i in range(count_color_lists))
 
 print(find_colors_not_in_second_list(list_1, list_2))
