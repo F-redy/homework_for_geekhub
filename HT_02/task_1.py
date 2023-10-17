@@ -2,9 +2,9 @@
 # from user and generate a list and a tuple with those numbers.
 
 
-def get_list_digits(string_digit: str, separator: str = ',') -> list[int]:
+def get_list_digits(string_digits: str, separator: str = ',') -> list[int]:
     try:
-        return list(map(int, string_digit.split(separator)))
+        return list(map(int, string_digits.split(separator)))
     except ValueError:
         raise ValueError(f'Values must be numbers. Separator must be "{separator}"')
 
