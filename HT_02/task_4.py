@@ -6,7 +6,7 @@ def concatenate_strings(user_data: list[str]) -> str:
     return ''.join(user_data)
 
 
-user_input = int(input())
-data = [input() for _ in range(user_input)]
+user_input = int(input('Enter number: '))
+data = [input(f'Enter string №{i + 1}: ') for i in range(user_input)]
 
 print(concatenate_strings(data))
