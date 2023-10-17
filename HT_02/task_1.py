@@ -3,6 +3,14 @@
     from user and generate a list and a tuple with those numbers.
 """
 
+
+def get_list_digits(string_digit: str, separator: str = ',') -> list[int]:
+    try:
+        return list(map(int, string_digit.split(separator)))
+    except ValueError:
+        raise ValueError(f'Values must be numbers. Separator must be "{separator}"')
+
+
 user_input = input()
-list_digits = user_input.split(',')
-tuple_digits = tuple(list_digits)
+list_digits = get_list_digits(user_input)
+tuple_digits = tuple(get_list_digits(user_input))
