@@ -4,11 +4,11 @@
 
 def get_list_digits(string_digits: str, separator: str = ',') -> list[int]:
     try:
-        return list(map(int, string_digits.split(separator)))
+        return list(map(int, string_digits.replace(' ', '').split(separator)))
     except ValueError:
         raise ValueError(f'Values must be numbers. Separator must be "{separator}"')
 
 
-user_input = input()
+user_input = input('Enter numbers separated by commas: ')
 list_digits = get_list_digits(user_input)
 tuple_digits = tuple(get_list_digits(user_input))
