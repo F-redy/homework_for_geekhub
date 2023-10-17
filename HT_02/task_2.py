@@ -1,7 +1,5 @@
-"""
-    Write a script which accepts two sequences of comma-separated colors from user.
-    Then print out a set containing all the colors from color_list_1 which are not present in color_list_2.
-"""
+# Write a script which accepts two sequences of comma-separated colors from user.
+# Then print out a set containing all the colors from color_list_1 which are not present in color_list_2.
 
 
 def find_colors_not_in_second_list(color_list_1: set[str], color_list_2: set[str]) -> str:
