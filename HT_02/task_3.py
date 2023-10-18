@@ -2,7 +2,7 @@
 
 
 def get_sum_numbers(list_numbers: list[int], user_number: int) -> int:
-    return sum(list_numbers[:user_number])
+    return sum(list_numbers[1:user_number + 1])
 
 
 n = int(input('Enter number: '))
