@@ -15,4 +15,7 @@ dictionary = {
 
 values = list(filter(lambda value: type(value) in (int, float), dictionary.values()))
 
-print(f'min = {min(values, default=0)}\nmax = {max(values, default=0)}')
+min_value = min(values, default=0)
+max_value = max(values, default=0)
+
+print(f'{min_value = }\n{max_value = }')
