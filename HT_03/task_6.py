@@ -1,5 +1,6 @@
 # 6. Write a script to get the maximum and minimum value in a dictionary.
 
+
 dictionary = {
     'id': 17,
     'name': 'NoName',
