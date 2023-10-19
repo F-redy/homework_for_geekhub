@@ -15,8 +15,4 @@ dictionary = {
 
 values = list(filter(lambda value: type(value) in (int, float), dictionary.values()))
 
-if values:
-    min_value, max_value = min(values), max(values)
-    print(f'{min_value = }\n{max_value = }')  # min: -35 max: 100644
-else:
-    print("The dictionary doesn't contain numbers")
+print(f'min = {min(values, default=0)}\nmax = {max(values, default=0)}')
