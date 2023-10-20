@@ -3,6 +3,7 @@
 
 
 test_list = [(), ('hey'), ('',), ('ma', 'ke', 'my'), [''], {}, ['d', 'a', 'y'], '', []]
-test_list = [value for value in test_list if value]
+print(f'Started list:\n{test_list}')
 
-print(test_list)
+test_list = [value for value in test_list if value]
+print(f'Changed list:\n{test_list}')
