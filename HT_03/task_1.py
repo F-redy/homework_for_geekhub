@@ -10,6 +10,6 @@ print(f'Started list:\n{random_number_tuples}\n')
 
 user_value = int(input('Enter the number to replace: '))
 
-random_number_tuples = [tuple(t[:-1] + (user_value,)) for t in random_number_tuples if t]
+random_number_tuples = [tuple(t[:-1] + (user_value,)) if t else t for t in random_number_tuples]
 
 print(f'\nChanged list:\n{random_number_tuples}')
