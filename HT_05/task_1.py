@@ -7,14 +7,14 @@
 from HT_05.common import colorize_text, UnsupportedColorError
 
 SEASONS = {
-    f'{colorize_text("Зима", "blue")}': (1, 2, 3),
-    f'{colorize_text("Весна", "green")}': (4, 5, 6),
-    f'{colorize_text("Лето", "light_blue")}': (7, 8, 9),
-    f'{colorize_text("Осень", "yellow")}': (10, 11, 12)
+    f'{colorize_text("Зима", "blue")}': (12, 1, 2),
+    f'{colorize_text("Весна", "green")}': (3, 4, 5),
+    f'{colorize_text("Лето", "light_blue")}': (6, 7, 8),
+    f'{colorize_text("Осень", "yellow")}': (9, 10, 11)
 }
 
 
-class NumberOutOfRangeError(ValueError):
+class NumberOutOfRangeError(Exception):
     pass
 
 
