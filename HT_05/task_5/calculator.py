@@ -150,3 +150,4 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             print('\n\napp finished working')
             break
+    # print(getattr(Calculator, '_add'))
