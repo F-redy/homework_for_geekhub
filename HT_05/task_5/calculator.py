@@ -54,17 +54,17 @@ class Calculator:
     MAX_POWER = 1000
 
     def __init__(self, num_1, operator, num_2):
-        self.__check_type(num_1, num_2, operator)
+        self.__check_inputs(num_1, num_2, operator)
         self.num1 = self.__get_numeric(num_1)
         self.num2 = self.__get_numeric(num_2)
-        self.operator = self.__get_operation(operator)
+        self.operator = self.__get_operator(operator)
         self.result = self._calculate()
 
     def __str__(self):
         return str(self.result)
 
     @staticmethod
-    def __check_type(a, b, op):
+    def __check_inputs(a, b, op):
         for value in [a, b, op]:
             if value is None:
                 raise IncorrectInputError(f'Invalid input! {value} none must be None.')
@@ -80,7 +80,7 @@ class Calculator:
                 raise TypeError(f'Invalid input! Value "{value}" must be int or float')
 
     @staticmethod
-    def __get_operation(operation: str) -> str:
+    def __get_operator(operation: str) -> str:
         if operation in OPERATIONS:
             return OPERATIONS[operation]
         raise InvalidOperatorError(f'Invalid operator! Enter one of the available operations. '
@@ -115,7 +115,7 @@ class Calculator:
         return a ** b
 
     def _calculate(self):
-        if self.operator == '__pow':
+        if self.operator == '_pow':
             if not (Calculator.MIN_POWER < self.num1 < Calculator.MAX_POWER or
                     Calculator.MIN_POWER < self.num2 < Calculator.MAX_POWER):
                 raise InvalidPowerOperationError(f'Error input for ** operation! '
