@@ -10,7 +10,7 @@ COLORS = {
 }
 
 
-class UnsupportedColorError(ValueError):
+class UnsupportedColorError(Exception):
     pass
 
 
