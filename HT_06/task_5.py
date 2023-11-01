@@ -4,7 +4,7 @@
 
 def fibonacci(number: int) -> None:
     f1, f2 = 1, 1
-    for _ in range(1, n + 1):
+    for _ in range(1, number + 1):
         if f1 > number:
             return
         print(f1, end=' ')
