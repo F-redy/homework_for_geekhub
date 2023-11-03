@@ -153,4 +153,4 @@ if __name__ == '__main__':
     ]
 
     for user in tests_users:
-        print_login_status(*user.values())
+        print_login_status(**user)
