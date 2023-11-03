@@ -58,7 +58,6 @@ def encode_morse(string: str) -> str:
 
 if __name__ == '__main__':
     morse_code('--. . . -.- .... ..- -...   .. ...   .... . .-. .')  # GEEKHUB IS HERE
-    morse_code('--. . . -.- .... ..-- -...   .. ...   .... . .-. .')  # GEEKHUB IS HERE
     morse_code('... --- ...   .- .-')  # SOS AA
     morse_code('.... . .-.. .-.. --- -.-.--   .... --- .--   .- .-. .   -.-- --- ..- -.-.--')  # HELLO! HOW ARE YOU!
     morse_code('-.-. .- .-.. .-..   ----. .---- .---- -.-.--   .-- .   -. . . -..   .--. .. --.. --.. .-   ..- .-.'
