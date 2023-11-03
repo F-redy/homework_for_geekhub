@@ -91,24 +91,31 @@ def validate_password(password: str) -> bool:
     return validate_length_password(password) and has_password_digit(password) and has_password_letters(password)
 
 
+def validate_credentials(username: str, password: str) -> bool:
+    is_username = validate_username(username)
+    is_password = validate_password(password)
+
+    return is_username and is_password
+
+
 def login(username: str, password: str, silent: bool = False) -> bool:
-    users = {
-        'bob': 'cP9R@il0!r',
-        'neal': '4V^XIdj*@v',
-        'sean': 'h+0TA3xW05',
-        'jonathan': 'o%tex5PrXL',
-        'carriesawyercarriesawyercarriesawyercarriesawyer50': '@$0tZgh0jc',
+    users = [
+        {'username': 'bob', 'password': 'cP9R@il0!r'},
+        {'username': 'neal', 'password': '4V^XIdj*@v'},
+        {'username': 'sean', 'password': 'h+0TA3xW05'},
+        {'username': 'jonathan', 'password': 'o%tex5PrXL'},
+        {'username': 'carriesawyercarriesawyercarriesawyercarriesawyer50', 'password': '@$0tZgh0jc'},
+    ]
+    validate_credentials(username, password)
 
-    }
-    validate_username(username)
-    validate_password(password)
+    for user in users:
+        if user['username'] == username and user['password'] == password:
+            return True
 
-    response = users.get(username) == password
-
-    if not response and not silent:
+    if not silent:
         raise LoginException('Authorisation Error')
 
-    return response
+    return False
 
 
 def print_login_status(username: str, password: str, silent: bool = False) -> None:
@@ -119,9 +126,12 @@ def print_login_status(username: str, password: str, silent: bool = False) -> No
             UserNameTooLongError, UserNameTooShortError) as e:
         result = e
     finally:
+        if type(result) == bool:
+            result = ('access is denied', 'OK')[result]
+
         print(f'-----\nName: {username}')
         print(f'Password: {password}')
-        print(f'Status: {(result, "OK")[type(result) == bool]}')
+        print(f'Status: {result}')
 
 
 if __name__ == '__main__':
