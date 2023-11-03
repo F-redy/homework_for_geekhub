@@ -78,3 +78,10 @@ def validate_username(username: str) -> bool:
 
 def validate_password(password: str) -> bool:
     return validate_length_password(password) and has_password_digit(password) and has_password_letters(password)
+
+
+def validate_credentials(username: str, password: str) -> bool:
+    is_username = validate_username(username)
+    is_password = validate_password(password)
+
+    return is_username and is_password
