@@ -9,7 +9,7 @@
 #     якщо silent == False -породжується виключення LoginException (його також треба створити =))
 
 
-from HT_07.task_2 import validate_password, validate_username
+from HT_07.task_2 import validate_credentials
 
 
 class LoginException(Exception):
@@ -17,20 +17,20 @@ class LoginException(Exception):
 
 
 def login(username: str, password: str, silent: bool = False) -> bool:
-    users = {
-        'bob': 'cP9R@il0!r',
-        'neal': '4V^XIdj*@v',
-        'sean': 'h+0TA3xW05',
-        'jonathan': 'o%tex5PrXL',
-        'carriesawyercarriesawyercarriesawyercarriesawyer50': '@$0tZgh0jc',
+    users = [
+        {'username': 'bob', 'password': 'cP9R@il0!r'},
+        {'username': 'neal', 'password': '4V^XIdj*@v'},
+        {'username': 'sean', 'password': 'h+0TA3xW05'},
+        {'username': 'jonathan', 'password': 'o%tex5PrXL'},
+        {'username': 'carriesawyercarriesawyercarriesawyercarriesawyer50', 'password': '@$0tZgh0jc'},
+    ]
+    validate_credentials(username, password)
 
-    }
-    validate_username(username)
-    validate_password(password)
+    for user in users:
+        if user['username'] == username and user['password'] == password:
+            return True
 
-    response = users.get(username) == password
-
-    if not response and not silent:
+    if not silent:
         raise LoginException('Authorisation Error')
 
-    return response
+    return False
