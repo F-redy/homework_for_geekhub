@@ -4,7 +4,7 @@
 # У випадку некоректного введеного значення - виводити відповідне повідомлення.
 
 
-from HT_05.common import colorize_text, UnsupportedColorError
+from HT_05.common import UnsupportedColorError, colorize_text
 
 SEASONS = {
     f'{colorize_text("Зима", "blue")}': (12, 1, 2),
@@ -40,7 +40,7 @@ if __name__ == '__main__':
         print(f'\n{colorize_text("The number must be an integer", "red")}')
     except NumberOutOfRangeError as out_of_range:
         print(out_of_range)
-    except UnsupportedColorError as error_color:
+    except UnsupportedColorError:
         print('\nContact the development department')
 
     if result:

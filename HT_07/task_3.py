@@ -126,7 +126,7 @@ def print_login_status(username: str, password: str, silent: bool = False) -> No
             UserNameTooLongError, UserNameTooShortError) as e:
         result = e
     finally:
-        if type(result) == bool:
+        if type(result) is bool:
             result = ('access is denied', 'OK')[result]
 
         print(f'-----\nName: {username}')

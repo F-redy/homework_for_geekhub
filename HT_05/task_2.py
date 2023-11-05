@@ -55,7 +55,7 @@ def get_data_info(user_name: str, age: int) -> str:
     if not isinstance(user_name, str):
         raise TypeError(f'{user_name} must be string!')
 
-    if type(age) != int:
+    if type(age) is not int:
         raise TypeError(f'{age} must be int!')
 
     letters: str = get_count_letter(user_name)
