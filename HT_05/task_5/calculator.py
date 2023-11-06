@@ -7,15 +7,7 @@
 
 from HT_05.common import colorize_text
 
-OPERATIONS = {
-    '+': '_add',
-    '-': '_sub',
-    '*': '_mul',
-    '/': '_truediv',
-    '%': '_mod',
-    '//': '_floordiv',
-    '**': '_pow'
-}
+OPERATIONS = ['+', '-', '*', '/', '%', '//', '**']
 
 CORRECT_EXPRESSION = ' | '.join([f"1 {op} 2" for op in OPERATIONS])
 
@@ -58,7 +50,7 @@ class Calculator:
         self.num1 = self.__get_numeric(num_1)
         self.num2 = self.__get_numeric(num_2)
         self.operator = self.__get_operator(operator)
-        self.result = self._calculate()
+        self.result = self.__calculate()
 
     def __str__(self):
         return str(self.result)
@@ -82,49 +74,29 @@ class Calculator:
     @staticmethod
     def __get_operator(operation: str) -> str:
         if operation in OPERATIONS:
-            return OPERATIONS[operation]
+            return operation
         raise InvalidOperatorError(f'Invalid operator! Enter one of the available operations. '
                                    f'Allowed operations: {" | ".join(OPERATIONS)}')
 
-    @staticmethod
-    def _add(a, b):
-        return a + b
+    def __calculate(self) -> int | float:
+        calc_dict = {
+            '+': lambda a, b: a + b,
+            '-': lambda a, b: a - b,
+            '*': lambda a, b: a * b,
+            '/': lambda a, b: a / b,
+            '%': lambda a, b: a % b,
+            '//': lambda a, b: a // b,
+            '**': lambda a, b: a ** b,
+        }
 
-    @staticmethod
-    def _sub(a, b):
-        return a - b
-
-    @staticmethod
-    def _mul(a, b):
-        return a * b
-
-    @staticmethod
-    def _truediv(a, b):
-        return a / b
-
-    @staticmethod
-    def _mod(a, b):
-        return a % b
-
-    @staticmethod
-    def _floordiv(a, b):
-        return a // b
-
-    @staticmethod
-    def _pow(a, b):
-        return a ** b
-
-    def _calculate(self):
-        if self.operator == '_pow':
+        if self.operator == '**':
             if not (Calculator.MIN_POWER < self.num1 < Calculator.MAX_POWER or
                     Calculator.MIN_POWER < self.num2 < Calculator.MAX_POWER):
                 raise InvalidPowerOperationError(f'Error input for ** operation! '
                                                  f'MAX_POWER = {Calculator.MAX_POWER - 1} '
                                                  f'and MIN_POWER = {Calculator.MIN_POWER + 1}')
 
-        fuck_calc = getattr(Calculator, self.operator)
-
-        return fuck_calc(self.num1, self.num2)
+        return calc_dict.get(self.operator)(self.num1, self.num2)
 
 
 if __name__ == '__main__':
