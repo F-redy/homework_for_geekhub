@@ -46,7 +46,7 @@ def get_user_balance(user: dict) -> float | None:
         logger.log_error(type(e).__name__, str(e))
         raise
 
-    return balance
+    return round(balance, 2)
 
 
 def change_user_balance(user: dict, value: float = 0.0, sub: bool = False) -> float | None:
@@ -61,13 +61,13 @@ def change_user_balance(user: dict, value: float = 0.0, sub: bool = False) -> fl
 
     try:
         with open(path_to_user_balance, 'w') as balance_file:
-            balance_file.write(str(user_balance))
+            balance_file.write(str(round(user_balance, 2)))
     except FileNotFoundError as e:
         print(settings.CONTACT_SUPPORT)
         logger.log_error(type(e).__name__, str(e))
         raise
 
-    return user_balance
+    return round(user_balance, 2)
 
 
 def create_transactions(user: dict, start_amount: float = None) -> dict:

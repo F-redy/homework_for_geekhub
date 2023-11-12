@@ -22,7 +22,7 @@ def add_user_balance(user: dict, transaction_amount: int | float) -> dict:
         'create_at': get_create_at()
     }
     change_transactions(user, transaction=transaction)
-    user['balance'] = user_balance
+    user['balance'] = round(user_balance, 2)
 
     print(f"Баланс {user['username']} поповнено на {transaction_amount}.")
 
