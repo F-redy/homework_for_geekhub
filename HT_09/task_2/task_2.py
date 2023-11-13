@@ -47,8 +47,7 @@ def check_length():
 def calculate_mid_positions(content: str, count_chars):
     """Calculate start and end positions for the middle block of characters."""
 
-    mid = int(len(content) / 2)
-    start = int(mid - count_chars / 2)
+    start = len(content) // 2 - count_chars // 2
     end = start + count_chars
 
     return start, end
@@ -88,6 +87,6 @@ def custom_reader(path_to_file: str, block_size: int) -> list | None:
 
 if __name__ == '__main__':
     file = r"example_txt.txt"
-    for count_ch in [20, 5, 10, 700, 2]:
+    for count_ch in [20, 5, 10, 700, 2, 3]:
         print('-' * 80)
         print(f'result block of characters:\n{custom_reader(file, count_ch)}')
