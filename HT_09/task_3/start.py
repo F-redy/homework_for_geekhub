@@ -1,3 +1,9 @@
+if __name__ == '__main__':
+    import sys
+    from pathlib import Path
+
+    sys.path.append(str(Path(__file__).parent.parent.parent))
+
 from HT_09.task_3.atm.menu import menu
 from HT_09.task_3.atm.view import login, registration
 from HT_09.task_3.users.view import register_user
