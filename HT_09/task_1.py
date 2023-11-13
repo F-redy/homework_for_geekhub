@@ -74,9 +74,11 @@ def traffic_light():
     print_colors(red, green)
     print_colors(yellow, red, repeat=2)
     print_colors(green, red)
+    print_colors(yellow, red, repeat=2)
+    print_colors(red, green, repeat=1)
 
 
-def crossroads(repeat: int = 2):
+def crossroads(repeat: int = 1):
     """
     Simulates a traffic light sequence at a crossroads with a specified number of repetitions.
 
