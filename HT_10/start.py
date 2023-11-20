@@ -4,7 +4,7 @@ if __name__ == '__main__':
 
     sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-from HT_10.atm_project.views import create_new_atm, get_atm_info
+from HT_10.atm.views import create_new_atm, get_atm_info
 from HT_10.database_operations import connect_db, execute_sql_script
 from HT_10.menu.collector_menu import CollectorMenu
 from HT_10.menu.user_menu import UserMenu

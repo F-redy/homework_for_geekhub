@@ -1,39 +1,5 @@
-from HT_10.atm_project.custom_exceptions import ATMCurrencyError
+from HT_10.atm.custom_exceptions import ATMCurrencyError
 from HT_10.database_operations import sq
-
-
-def manage_atm_currency(connect: sq.Connection, query, atm_id: int, currency_data: dict,
-                        is_update: bool = False) -> bool:
-    """
-    Добавляет или обновляет записи о валюте в таблице atm_currency для указанного банкомата.
-
-    Args:
-        connect (sqlite3.Connection): Объект соединения с базой данных.
-        atm_id (int): Идентификатор банкомата, для которого добавляется или обновляется валюта.
-        query (str): SQL-запрос для добавления или обновления данных в таблице atm_currency.
-        currency_data (dict): Словарь со значениями валюты в формате {denomination: quantity}.
-        is_update (bool, optional): Флаг, указывающий на операцию обновления. По умолчанию False (операция вставки).
-
-    Returns:
-        bool: Возвращает True, если операция выполнена успешно.
-
-    Raises:
-        ATMCurrencyError: Если произошла ошибка при добавлении или обновлении валюты в банкомате.
-    """
-    cursor = connect.cursor()
-    _denomination = None
-
-    try:
-        for denomination, quantity in currency_data.items():
-            _denomination = denomination
-            cursor.execute(query, (quantity, atm_id, denomination))
-        connect.commit()
-        return True
-
-    except sq.Error as e:
-        connect.rollback()
-        action = "обновления" if is_update else "добавления"
-        raise ATMCurrencyError(f"Ошибка при {action} валюты {_denomination} для банкомата с ID {atm_id}: {e}")
 
 
 def create_atm_currency(connect: sq.Connection, atm_id: int, currency_data: dict) -> bool:
@@ -54,7 +20,6 @@ def create_atm_currency(connect: sq.Connection, atm_id: int, currency_data: dict
 
     query = """INSERT OR IGNORE INTO atm_currency (atm_id, denomination, quantity) VALUES (?, ?, ?)"""
     cursor = connect.cursor()
-
     _denomination = None
 
     try:

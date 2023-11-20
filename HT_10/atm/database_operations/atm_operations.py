@@ -1,4 +1,4 @@
-from HT_10.atm_project.custom_exceptions import ATMError
+from HT_10.atm.custom_exceptions import ATMError
 from HT_10.database_operations import sq
 
 

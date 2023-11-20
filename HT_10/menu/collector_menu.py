@@ -1,6 +1,6 @@
-from HT_10.atm_project.database_operations.atm_currency_operations import (
+from HT_10.atm.database_operations.atm_currency_operations import (
     create_atm_currency, delete_atm_currency)
-from HT_10.atm_project.views import change_atm_balance, get_atm_info
+from HT_10.atm.views import change_atm_balance, get_atm_info
 from HT_10.menu.custom_exceptions import ValidationError
 from HT_10.menu.utils import get_user_choose_menu
 from HT_10.menu.validators import is_integer, validate_currencies

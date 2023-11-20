@@ -1,5 +1,4 @@
-from HT_10.atm_project.validators import (validate_atm_balance,
-                                          validate_atm_currency)
+from HT_10.atm.validators import validate_atm_balance, validate_atm_currency
 
 
 def atm_balance_model(balance_default):

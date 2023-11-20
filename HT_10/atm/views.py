@@ -1,11 +1,11 @@
-from HT_10.atm_project.custom_exceptions import (ATMBalanceError,
-                                                 ATMCurrencyError, ATMError)
-from HT_10.atm_project.database_operations.atm_currency_operations import (
+from HT_10.atm.custom_exceptions import (ATMBalanceError, ATMCurrencyError,
+                                         ATMError)
+from HT_10.atm.database_operations.atm_currency_operations import (
     create_atm_currency, delete_atm_currency, get_atm_currencies)
-from HT_10.atm_project.database_operations.atm_operations import (
-    create_atm, get_atm, update_atm_balance)
-from HT_10.atm_project.models import atm_balance_model, atm_currency_model
-from HT_10.atm_project.validators import validate_atm_currency, validate_atm_id
+from HT_10.atm.database_operations.atm_operations import (create_atm, get_atm,
+                                                          update_atm_balance)
+from HT_10.atm.models import atm_balance_model, atm_currency_model
+from HT_10.atm.validators import validate_atm_currency, validate_atm_id
 from HT_10.settings import ALLOWED_CURRENCY
 
 
