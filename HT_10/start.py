@@ -59,9 +59,9 @@ def start(new_atm=False):
             if user_input == '1':
                 menu_collector.collector_menu(connect, atm)
             else:
-                menu.user_menu(connect, user, atm, menu_collector)
+                menu.user_menu(connect, user, atm)
         case 'user':
-            menu.user_menu(connect, user, atm, menu_collector)
+            menu.user_menu(connect, user, atm)
 
 
 if __name__ == '__main__':

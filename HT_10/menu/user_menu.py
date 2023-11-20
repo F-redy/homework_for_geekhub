@@ -1,6 +1,8 @@
 from HT_10.menu.custom_exceptions import ValidationError
 from HT_10.menu.utils import get_user_choose_menu, withdrawal_user_balance
 from HT_10.menu.validators import is_integer
+from HT_10.users.database_operations.transaction_operations import \
+    get_user_transactions
 from HT_10.users.views import (authenticate_user, change_user_balance,
                                register_user)
 
@@ -17,8 +19,9 @@ class UserMenu:
         '\nВыберите действие:',
         '1. Проверить баланс',
         '2. Пополнить баланс',
-        '3. Снять средства',
-        '4. Выход\n',
+        '3. Снять наличные',
+        '4. История трансакций',
+        '5. Выход\n',
     ]
 
     @staticmethod
@@ -63,6 +66,22 @@ class UserMenu:
         print('-' * 40, '\n')
 
     @staticmethod
+    def show_user_transactions(connect, user: dict):
+        user_transactions = get_user_transactions(connect, user_id=user['id'])
+        if user_transactions:
+            print(f'\nВсе транзакции для Пользователя: {user["username"]}')
+            for indx, transaction in enumerate(user_transactions, -len(user_transactions)):
+                n = 40 // 2
+                print(f"{'-' * n} {abs(indx)} {'-' * n}")
+                print(f'тип транзакции: {transaction["type_transaction"]}', )
+                print(f'сумма: {transaction["amount"]}')
+                print(f'создана: {transaction["created_at"]}')
+                print(f"{'-' * (n * 2 + len(str(abs(indx))) + 2)}")
+        else:
+            print('\nПользователь не совершил ни одной транзакции')
+        print()
+
+    @staticmethod
     def change_user_balance(connect, user: dict, atm: dict = None, sub=False):
         value = None
         while value is None:
@@ -73,7 +92,7 @@ class UserMenu:
 
         return change_user_balance(connect, user, value, atm, sub)
 
-    def user_menu(self, connect, user, atm, menu_collector):
+    def user_menu(self, connect, user, atm):
         while True:
             user_input = get_user_choose_menu(self.USER_MENU)
 
@@ -86,5 +105,7 @@ class UserMenu:
                     user, atm = self.change_user_balance(connect, user, atm, sub=True)
                     atm = withdrawal_user_balance(connect, atm)
                 case '4':
+                    self.show_user_transactions(connect, user)
+                case '5':
                     print('Работа завершена')
                     return

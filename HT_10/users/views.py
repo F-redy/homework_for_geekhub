@@ -1,8 +1,8 @@
 from HT_10.users.custom_exceptions import (IncorrectPasswordError,
                                            UserExistsError, UserNotFoundError,
                                            ValidationError)
-from HT_10.users.database_operations.transaction_operations import (
-    create_user_transaction, get_user_transactions)
+from HT_10.users.database_operations.transaction_operations import \
+    create_user_transaction
 from HT_10.users.database_operations.user_operations import (
     add_user, get_user, update_user_balance)
 from HT_10.users.models import user_model
@@ -98,30 +98,3 @@ def change_user_balance(connect, user: dict, value: int, atm: dict, sub: bool = 
     atm['balance'] = atm_balance
     print('Операция прошла успешно.\n')
     return user, atm
-
-
-def show_user_info(user: dict):
-    print('-' * 40)
-    print(f'username:{"":>12}{user["username"]}')
-    print(f'balance:{"":>13}{user["balance"]}')
-    print(f'role:{"":>16}{user["role"]}')
-    print(f'created at:{"":>10}{user["created_at"]}')
-    print(f'updated at:{"":>10}{user["updated_at"]}')
-    print('-' * 40)
-    print()
-
-
-def show_user_transactions(connect, user_id: int, username: str):
-    user_transactions = get_user_transactions(connect, user_id=user_id)
-    if user_transactions:
-        print(f'Все транзакции для Пользователя: {username}')
-        for indx, transaction in enumerate(user_transactions, -len(user_transactions)):
-            n = 40 // 2
-            print(f"{'-' * n} {abs(indx)} {'-' * n}")
-            print(f'тип транзакции: {transaction["type_transaction"]}', )
-            print(f'сумма: {transaction["amount"]}')
-            print(f'создана: {transaction["created_at"]}')
-            print(f"{'-' * (n * 2 + len(str(abs(indx))) + 2)}")
-    else:
-        print('Пользователь не совершил ни одной транзакции')
-    print()
