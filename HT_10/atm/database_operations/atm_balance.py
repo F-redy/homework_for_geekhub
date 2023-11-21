@@ -7,7 +7,7 @@ def create_atm_balance(connect: sq.Connection, atm_id: int, balance: int) -> Non
     cursor = connect.cursor()
 
     try:
-        cursor.execute(query, (atm_id,balance))
+        cursor.execute(query, (atm_id, balance))
         connect.commit()
     except sq.Error as e:
         connect.rollback()

@@ -31,8 +31,6 @@ def create_new_atm(connect, currency_data: dict = None):
         create_atm_currency(connect, atm_id, atm_currency_data)
         atm_balance = get_sum_atm_currency(connect, atm_id)
         create_atm_balance(connect, atm_id, atm_balance)
-        print(f'{atm_balance = }')
-        # update_atm_balance(connect, atm_id, atm_balance)
 
     except (ATMBalanceError, ATMCurrencyError) as e:
         print(e)

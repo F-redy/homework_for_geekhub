@@ -108,11 +108,3 @@ class CollectorMenu:
                 case '5':
                     print('Работа завершена.')
                     return
-                # case '4':
-                #     atm = self.change_balance_atm(connect, atm)
-                # case '5':
-                #     atm = self.change_balance_atm(connect, atm, sub=True)
-                # case '6':
-                #     atm = self.change_atm_currencies(connect, atm)
-                # case '7':
-                # atm = self.change_atm_currencies(connect, atm, delete=True)
