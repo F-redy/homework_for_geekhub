@@ -33,7 +33,7 @@ def validate_quantity(quantity: str) -> int | None:
     except ValueError:
         raise ValidationError('Количество купюр должно быть целым числом.')
 
-    if quantity < 1:
-        raise ValidationError('Количество купюр должно быть больше 0')
+    if quantity < 0:
+        raise ValidationError('Количество купюр должно быть больше или равно 0')
 
     return quantity
