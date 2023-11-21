@@ -22,7 +22,6 @@ def register_user(connect, username: str, password: str, role: str = 'user', bal
 
     if new_user:
         try:
-            print(new_user)
             add_user(connect, **new_user)
         except UserExistsError as e:
             if not silent:
