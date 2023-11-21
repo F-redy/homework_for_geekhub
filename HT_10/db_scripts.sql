@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS atm (
 CREATE TABLE IF NOT EXISTS atm_balance (
     id                  INTEGER             PRIMARY KEY AUTOINCREMENT,
     atm_id              INTEGER             NOT NULL,
-    balance             INTEGER             DEFAULT 0,
+    balance             INTEGER             NOT NULL,
     FOREIGN KEY         (atm_id)            REFERENCES  atm(id) ON DELETE CASCADE
 );
 
