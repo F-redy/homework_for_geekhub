@@ -2,7 +2,7 @@ from HT_10.atm.custom_exceptions import ATMCurrencyError
 from HT_10.database_operations import sq
 
 
-def create_atm_currency(connect: sq.Connection, atm_id: int, currency_data: dict) -> bool:
+def create_atm_currency(connect: sq.Connection, atm_id: int, currency_data: dict) -> None:
     """
     Добавляет записи о валюте в таблицу atm_currency для указанного банкомата.
 
@@ -11,8 +11,7 @@ def create_atm_currency(connect: sq.Connection, atm_id: int, currency_data: dict
         atm_id (int): Идентификатор банкомата, для которого добавляется валюта.
         currency_data (dict): Словарь со значениями валюты в формате {denomination: quantity}.
 
-    Returns:
-        bool: Возвращает True, если операция добавления выполнена успешно.
+    Returns: None
 
     Raises:
         ATMCurrencyError: Если произошла ошибка при добавлении валюты в банкомат.
@@ -32,8 +31,6 @@ def create_atm_currency(connect: sq.Connection, atm_id: int, currency_data: dict
         connect.rollback()
         raise ATMCurrencyError(f"Ошибка при добавлении валюты {_denomination} для банкомата с ID {atm_id}: {e}")
 
-    return True
-
 
 def get_atm_currencies(connect: sq.Connection, atm_id: int) -> list[sq.Row]:
     """
@@ -52,7 +49,7 @@ def get_atm_currencies(connect: sq.Connection, atm_id: int) -> list[sq.Row]:
             ATMCurrencyError: Если произошла ошибка при получении данных о валюте для банкомата.
     """
     query = """
-    SELECT denomination
+    SELECT denomination, quantity
     FROM atm_currency
     WHERE atm_id = ?
     """
@@ -68,7 +65,22 @@ def get_atm_currencies(connect: sq.Connection, atm_id: int) -> list[sq.Row]:
     return currencies
 
 
-def update_atm_currencies(connect: sq.Connection, atm_id: int, new_currency_data: dict) -> True:
+def get_sum_atm_currency(connect: sq.Connection, atm_id: int) -> int:
+    query = """
+        SELECT SUM(denomination * quantity)
+        FROM atm_currency
+        WHERE atm_id = ?
+        """
+    cursor = connect.cursor()
+    try:
+        balance = cursor.execute(query, (atm_id,)).fetchone()
+    except sq.Error as e:
+        raise ATMCurrencyError(f"Ошибка при получении данных о валюте для банкомата c ID{atm_id}: {e}")
+
+    return sum(balance)
+
+
+def update_atm_currencies(connect: sq.Connection, atm_id: int, new_currency_data: dict) -> None:
     """
     Обновляет данные о валюте для указанного банкомата.
 
@@ -82,8 +94,8 @@ def update_atm_currencies(connect: sq.Connection, atm_id: int, new_currency_data
     """
     query = """
     UPDATE atm_currency
-    SET denomination = ?, quantity = ?
-    WHERE atm_id = ?
+    SET quantity = ?
+    WHERE atm_id = ? AND denomination = ?
     """
     cursor = connect.cursor()
 
@@ -92,14 +104,12 @@ def update_atm_currencies(connect: sq.Connection, atm_id: int, new_currency_data
     try:
         for denomination, quantity in new_currency_data.items():
             _denomination = denomination
-            cursor.execute(query, (denomination, quantity, atm_id))
+            cursor.execute(query, (quantity, atm_id, denomination))
         connect.commit()
 
     except sq.Error as e:
         connect.rollback()
         raise ATMCurrencyError(f"Ошибка при обновлении валюты {_denomination} для банкомата с ID {atm_id}: {e}")
-
-    return True
 
 
 def delete_atm_currency(connect: sq.Connection, atm_id: int, denominations_list: list) -> bool:

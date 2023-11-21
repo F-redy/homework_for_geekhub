@@ -1,9 +1,10 @@
-from HT_10.atm.database_operations.atm_currency_operations import (
-    create_atm_currency, delete_atm_currency)
+from HT_10.atm.database_operations.atm_currency_operations import \
+    update_atm_currencies
 from HT_10.atm.views import change_atm_balance, get_atm_info
 from HT_10.menu.custom_exceptions import ValidationError
 from HT_10.menu.utils import get_user_choose_menu
-from HT_10.menu.validators import is_integer, validate_currencies
+from HT_10.menu.validators import (is_integer, validate_denomination,
+                                   validate_quantity)
 
 
 class CollectorMenu:
@@ -16,18 +17,17 @@ class CollectorMenu:
         '1. Просмотреть общую информацию о банкомате.',
         '2. Просмотреть баланс банкомата.',
         '3. Просмотреть наминал купюр банкомата.',
-        '4. Пополнить баланс банкомата.',
-        '5. Изъять деньги в банкомате.',
-        '6. Добавить наминал купюр в банкомат.',
-        '7. Удалить наминал купюр из банкомат.',
-        '8. Выход\n',
+        '4. Изменить количество купюр.',
+        '5. Выход\n',
     ]
 
-    @staticmethod
-    def show_atm_info(atm_info: dict):
+    def show_atm_info(self, atm_info: dict):
         print()
         for name, value in atm_info.items():
-            print(f'{name}: {value}')
+            if name == 'currencies':
+                self.show_atm_currencies(value)
+            else:
+                print(f'{name}: {value}')
         print()
 
     @staticmethod
@@ -35,9 +35,12 @@ class CollectorMenu:
         print(f'\nБаланс банкомата: {atm_balance}\n')
 
     @staticmethod
-    def show_atm_currencies(all_atm_currencies: list[int]):
+    def show_atm_currencies(all_atm_currencies: list[dict]):
         if all_atm_currencies:
-            print(all_atm_currencies)
+            title = 'ATM currency'
+            print(f'\n{title:^40}')
+            for currency in all_atm_currencies:
+                print(f'denomination: {currency["denomination"]:<10}quantity: {currency["quantity"]}')
         else:
             print('\nВ банкомат ещё не добавлена валюта.\n')
         print()
@@ -69,24 +72,21 @@ class CollectorMenu:
         return atm
 
     @staticmethod
-    def change_atm_currencies(connect, atm: dict, delete: bool = False):
-        denominations_list = None
+    def change_atm_currencies(connect, atm: dict):
+        denomination = None
+        quantity = None
 
-        while denominations_list is None:
+        while denomination is None or quantity is None:
             try:
-                message = '\nВведите номиналы купюр цифрами, через пробел: '
-                denominations_list = validate_currencies(list(map(int, input(message).split())))
+                if denomination is None:
+                    denomination = validate_denomination(input('\nВведите номинал купюры цифрами: '))
+                if quantity is None:
+                    quantity = validate_quantity(input('\nВведите количество купюр цифрами: '))
             except ValidationError as e:
                 print(e)
 
-        valid_denominations_list = sorted(validate_currencies(denominations_list))
-
-        if delete:
-            delete_atm_currency(connect, atm['id'], valid_denominations_list)
-        else:
-            currency_data = dict.fromkeys(valid_denominations_list, 1000)
-            create_atm_currency(connect, atm['id'], currency_data)
-
+        currency_data = {denomination: quantity}
+        update_atm_currencies(connect, atm['id'], currency_data)
         atm = get_atm_info(connect, atm['id'])
 
         print('\nОперация прошла успешно.\n')
@@ -104,13 +104,15 @@ class CollectorMenu:
                 case '3':
                     self.show_atm_currencies(atm['currencies'])
                 case '4':
-                    atm = self.change_balance_atm(connect, atm)
-                case '5':
-                    atm = self.change_balance_atm(connect, atm, sub=True)
-                case '6':
                     atm = self.change_atm_currencies(connect, atm)
-                case '7':
-                    atm = self.change_atm_currencies(connect, atm, delete=True)
-                case '8':
+                case '5':
                     print('Работа завершена.')
                     return
+                # case '4':
+                #     atm = self.change_balance_atm(connect, atm)
+                # case '5':
+                #     atm = self.change_balance_atm(connect, atm, sub=True)
+                # case '6':
+                #     atm = self.change_atm_currencies(connect, atm)
+                # case '7':
+                # atm = self.change_atm_currencies(connect, atm, delete=True)

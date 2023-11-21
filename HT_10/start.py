@@ -30,17 +30,12 @@ def create_base_users_and_admin(connect):
             pass
 
 
-def create_base_atm(connect):
-    return create_new_atm(connect)['id']
-
-
 def start(new_atm=False):
     connect = connect_db()
     execute_sql_script(connect)
     create_base_users_and_admin(connect)
-
     if new_atm:
-        atm_id = create_base_atm(connect)
+        atm_id = create_new_atm(connect)['id']
     else:
         atm_id = 1
 

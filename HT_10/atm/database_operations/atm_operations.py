@@ -2,12 +2,12 @@ from HT_10.atm.custom_exceptions import ATMError
 from HT_10.database_operations import sq
 
 
-def create_atm(connect: sq.Connection, balance: int) -> int | None:
-    query = """INSERT INTO atm (balance) VALUES (?)"""
+def create_atm(connect: sq.Connection) -> int | None:
+    query = """INSERT INTO atm DEFAULT VALUES"""
     cursor = connect.cursor()
 
     try:
-        cursor.execute(query, (balance,))
+        cursor.execute(query, )
         connect.commit()
         print(f'Новый банкомат c ID {cursor.lastrowid} создан')
         return cursor.lastrowid  # Возвращаем ID только что созданной записи
@@ -16,10 +16,10 @@ def create_atm(connect: sq.Connection, balance: int) -> int | None:
 
 
 def get_atm(connect: sq.Connection, atm_id: int) -> sq.Row | None:
-    """'keys: id', 'balance', 'created_at', 'updated_at'"""
+    """'keys: id', 'created_at', 'updated_at'"""
 
     query = """
-    SELECT id, balance, created_at, updated_at
+    SELECT id, created_at, updated_at
     FROM atm
     WHERE id = ?
     """
@@ -31,22 +31,6 @@ def get_atm(connect: sq.Connection, atm_id: int) -> sq.Row | None:
         raise ATMError(f'Банкомат с ID {atm_id} не найден.')
 
     return atm
-
-
-def update_atm_balance(connect: sq.Connection, atm_id: int, new_balance: int) -> bool:
-    query = """
-    UPDATE atm
-    SET balance = ?
-    WHERE id = ?
-    """
-    cursor = connect.cursor()
-
-    cursor.execute(query, (new_balance, atm_id))
-    connect.commit()
-
-    if cursor.rowcount > 0:
-        return True
-    raise ATMError(f"Ошибка при изменении баланса банкомата c ID {atm_id}")
 
 
 def delete_atm(connect: sq.Connection, id_atm: int):

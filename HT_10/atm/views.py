@@ -1,10 +1,12 @@
 from HT_10.atm.custom_exceptions import (ATMBalanceError, ATMCurrencyError,
                                          ATMError)
+from HT_10.atm.database_operations.atm_balance import (create_atm_balance,
+                                                       update_atm_balance)
 from HT_10.atm.database_operations.atm_currency_operations import (
-    create_atm_currency, delete_atm_currency, get_atm_currencies)
-from HT_10.atm.database_operations.atm_operations import (create_atm, get_atm,
-                                                          update_atm_balance)
-from HT_10.atm.models import atm_balance_model, atm_currency_model
+    create_atm_currency, delete_atm_currency, get_atm_currencies,
+    get_sum_atm_currency)
+from HT_10.atm.database_operations.atm_operations import create_atm, get_atm
+from HT_10.atm.models import atm_balance_model, atm_currency_model, atm_model
 from HT_10.atm.validators import validate_atm_currency, validate_atm_id
 from HT_10.settings import ALLOWED_CURRENCY
 
@@ -21,27 +23,25 @@ def create_atm_currency_data(currency_data: dict):
     return atm_currency_data
 
 
-def create_new_atm(connect, balance: int = 100000, currency_data: dict = None):
+def create_new_atm(connect, currency_data: dict = None):
     try:
-        balance = atm_balance_model(balance)
         atm_currency_data = create_atm_currency_data(currency_data)
 
-        atm_id = create_atm(connect, **balance)
+        atm_id = create_atm(connect)
         create_atm_currency(connect, atm_id, atm_currency_data)
+        atm_balance = get_sum_atm_currency(connect, atm_id)
+        create_atm_balance(connect, atm_id, atm_balance)
+        print(f'{atm_balance = }')
+        # update_atm_balance(connect, atm_id, atm_balance)
 
     except (ATMBalanceError, ATMCurrencyError) as e:
         print(e)
         return
 
-    atm = {
-        'id': atm_id,
-        'balance': balance['balance'],
-        'atm_currencies': atm_currency_data
-    }
-    return atm
+    return atm_model(atm_id, atm_balance, atm_currency_data)
 
 
-def get_all_atm_currencies(connect, atm_id: int) -> list[int] | None:
+def get_all_atm_currencies(connect, atm_id: int) -> list[dict] | None:
     try:
         atm_id = validate_atm_id(atm_id)
         all_atm_currencies = get_atm_currencies(connect, atm_id)
@@ -49,17 +49,18 @@ def get_all_atm_currencies(connect, atm_id: int) -> list[int] | None:
         print(e)
         return
 
-    return [cur['denomination'] for cur in all_atm_currencies]
+    return [{'denomination': cur['denomination'], 'quantity': cur['quantity']} for cur in all_atm_currencies]
 
 
 def get_atm_info(connect, atm_id: int) -> dict:
     atm_db = get_atm(connect, validate_atm_id(atm_id))
+    atm_balance = get_sum_atm_currency(connect, atm_id)
     all_atm_currencies = get_all_atm_currencies(connect, atm_id)
     atm_currencies = [currency for currency in all_atm_currencies]
 
     atm_info = {
         'id': atm_db['id'],
-        'balance': atm_db['balance'],
+        'balance': atm_balance,
         'currencies': atm_currencies,
         'created_at': atm_db['created_at'],
         'updated_at': atm_db['updated_at']

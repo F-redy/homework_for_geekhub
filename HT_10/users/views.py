@@ -52,8 +52,8 @@ def authenticate_user(connect, entered_username: str, entered_password: str) -> 
     return dict(user)
 
 
-def process_transaction(amount: int, available_currencies: list[int], sub: bool = False) -> int:
-    min_currency = min(available_currencies)
+def process_transaction(amount: int, available_currencies: dict, sub: bool = False) -> int:
+    min_currency = min(currency['denomination'] for currency in available_currencies)
 
     if amount % min_currency != 0:
         if sub:
@@ -78,7 +78,6 @@ def change_user_balance(connect, user: dict, value: int, atm: dict, sub: bool = 
                 value = process_transaction(value, available_currencies, sub=True)
                 if value:
                     user_balance -= value
-                    atm_balance -= value
                 else:
                     return user, atm
             else:
@@ -95,6 +94,5 @@ def change_user_balance(connect, user: dict, value: int, atm: dict, sub: bool = 
     create_user_transaction(connect, user['id'], ('deposit', 'withdrawal')[sub], value)
 
     user['balance'] = user_balance
-    atm['balance'] = atm_balance
     print('Операция прошла успешно.\n')
     return user, atm

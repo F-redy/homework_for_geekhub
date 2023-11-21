@@ -1,8 +1,14 @@
 CREATE TABLE IF NOT EXISTS atm (
     id                  INTEGER             PRIMARY KEY AUTOINCREMENT,
-    balance             INTEGER             DEFAULT 100000,
     created_at          DATETIME            DEFAULT CURRENT_TIMESTAMP,
     updated_at          DATETIME            DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS atm_balance (
+    id                  INTEGER             PRIMARY KEY AUTOINCREMENT,
+    atm_id              INTEGER             NOT NULL,
+    balance             INTEGER             DEFAULT 0,
+    FOREIGN KEY         (atm_id)            REFERENCES  atm(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS atm_currency (
@@ -37,17 +43,18 @@ CREATE TABLE IF NOT EXISTS transactions (
 
 -- ТРИГЕРЫ
 
--- Триггер для таблицы atm, устанавливающей created_at при вставке
-CREATE TRIGGER IF NOT EXISTS set_atm_created_at
-AFTER INSERT ON atm
+-- Создание триггера для обновления updated_at в таблице atm при изменении баланса банкомата
+CREATE TRIGGER IF NOT EXISTS update_atm_updated_at
+    AFTER UPDATE
+    ON atm_balance
 BEGIN
     UPDATE atm
-    SET created_at = CURRENT_TIMESTAMP
-    WHERE id = NEW.id;
+    SET updated_at = CURRENT_TIMESTAMP
+    WHERE id = NEW.atm_id;
 END;
 
 -- Триггер для обновляющей таблицы atm updated_at при изменении данных
-CREATE TRIGGER IF NOT EXISTS update_atm_updated_at
+CREATE TRIGGER IF NOT EXISTS update_atm_balance_updated_at
 AFTER UPDATE ON atm
 BEGIN
     UPDATE atm
