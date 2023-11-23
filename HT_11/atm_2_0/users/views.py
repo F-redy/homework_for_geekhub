@@ -40,6 +40,7 @@ class UserView:
             if bonus:
                 self.user_db.update_user_balance(user_id, balance)
                 self.user_db.create_user_transaction(user_id, type_transaction='bonus', amount=bonus)
+                print(f'Поздравляем мы получили бонус: {bonus} при регистрации.')
 
             user_from_db = self.user_db.get_user(username)
             transactions = self.user_db.get_user_transactions(user_id)
