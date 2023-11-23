@@ -53,6 +53,7 @@ class Statr:
     def create_test_data(self):
 
         user_balance = 10000
+        # Тестовые user-ы не проходят полную валидацию и не получают шанс получить 10% бонуса к начальной сумме.
         users = [
             {'username': 'admin', 'hashed_password': hash_password('admin'), 'role': 'collector',
              'balance': user_balance},
