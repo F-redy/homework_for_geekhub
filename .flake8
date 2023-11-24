@@ -4,5 +4,6 @@ exclude =
     **migrations
     venv
     tests
+ignore = F401
 
 max-line-length = 120
