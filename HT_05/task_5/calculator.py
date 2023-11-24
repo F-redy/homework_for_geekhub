@@ -90,7 +90,7 @@ class Calculator:
         }
 
         if self.operator == '**':
-            if not (Calculator.MIN_POWER < self.num1 < Calculator.MAX_POWER or
+            if not (Calculator.MIN_POWER < self.num1 < Calculator.MAX_POWER) or (
                     Calculator.MIN_POWER < self.num2 < Calculator.MAX_POWER):
                 raise InvalidPowerOperationError(f'Error input for ** operation! '
                                                  f'MAX_POWER = {Calculator.MAX_POWER - 1} '
