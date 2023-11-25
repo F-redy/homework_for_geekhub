@@ -99,4 +99,3 @@ class ATMValidator:
             raise ATMError(f'{atm_id} должен быть числом.')
 
         return atm_id
-
