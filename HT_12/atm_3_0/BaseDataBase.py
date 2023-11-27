@@ -19,7 +19,7 @@ class BaseDataBase:
         if cls.connect is None:
             cls.connect = cls.connect_db()
             cls.cursor = cls.connect.cursor()
-        cls.execute_sql_script()
+        cls._execute_sql_script()
         return super().__new__(cls, *args, **kwargs)
 
     @staticmethod
@@ -39,7 +39,7 @@ class BaseDataBase:
             raise
 
     @classmethod
-    def execute_sql_script(cls) -> None:
+    def _execute_sql_script(cls) -> None:
         """
         Выполняет SQL-скрипт для инициализации базы данных.
         """
@@ -50,7 +50,7 @@ class BaseDataBase:
         cls.connect.commit()
 
     @classmethod
-    def execute_query(cls, query: str, params: tuple = None, is_commit: bool = False):
+    def _execute_query(cls, query: str, params: tuple = None, is_commit: bool = False):
         """
         Выполняет SQL-запрос к базе данных.
 
@@ -68,8 +68,33 @@ class BaseDataBase:
         try:
             if params is None:
                 cls.cursor.execute(query)
+
             else:
                 cls.cursor.execute(query, params)
+        except sq.Error:
+            cls.connect.rollback()
+            raise
+        if is_commit:
+            cls.connect.commit()
+
+    @classmethod
+    def _execute_many_queries(cls, query: str, data: list[tuple], is_commit: bool = False):
+        """
+        Выполняет массовую операцию SQL-запросов к базе данных.
+
+        Args:
+            query (str): SQL-запрос для выполнения.
+            data (list): Список кортежей с параметрами для SQL-запроса.
+            is_commit (bool, optional): Флаг для фиксации изменений в базе данных.
+
+        Raises:
+            sqlite3.Error: В случае ошибки при выполнении запроса.
+
+        Notes:
+            Если `is_commit` установлен в `True`, изменения фиксируются в базе данных.
+        """
+        try:
+            cls.cursor.executemany(query, data)
         except sq.Error:
             cls.connect.rollback()
             raise

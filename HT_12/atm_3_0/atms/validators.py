@@ -1,5 +1,4 @@
-from HT_12.atm_3_0.custom_exceptions import (ATMBalanceError, ATMCurrencyError,
-                                             ATMError)
+from HT_12.atm_3_0.custom_exceptions import ATMBalanceError, ATMCurrencyError
 from HT_12.atm_3_0.settings import ALLOWED_CURRENCY
 
 
@@ -7,7 +6,7 @@ class ATMValidator:
     """ Класс, предоставляющий методы для валидации данных, связанных с банкоматом. """
 
     @staticmethod
-    def validate_atm_balance(atm_balance) -> int | None:
+    def validate_atm_balance(atm_balance) -> int:
         """
         Проверяет корректность баланса банкомата.
 
@@ -31,7 +30,7 @@ class ATMValidator:
         return atm_balance
 
     @staticmethod
-    def validate_denomination(denomination) -> int | None:
+    def validate_denomination(denomination) -> int:
         """
         Проверяет корректность номинала купюр.
 
@@ -57,7 +56,7 @@ class ATMValidator:
         return denomination
 
     @staticmethod
-    def validate_quantity(quantity):
+    def validate_quantity(quantity) -> int:
         """
         Проверяет корректность количества купюр.
 
@@ -78,24 +77,3 @@ class ATMValidator:
         if quantity < 0:
             raise ATMCurrencyError('Количество купюр должно быть больше или равно 0')
         return quantity
-
-    @staticmethod
-    def validate_atm_id(atm_id):
-        """
-        Проверяет корректность идентификатора банкомата.
-
-        Args:
-            atm_id: Идентификатор банкомата.
-
-        Returns:
-            int: Идентификатор банкомата.
-
-        Raises:
-            ATMError: Если идентификатор банкомата не является целым числом.
-        """
-        try:
-            atm_id = int(atm_id)
-        except ValueError:
-            raise ATMError(f'{atm_id} должен быть числом.')
-
-        return atm_id

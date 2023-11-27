@@ -24,7 +24,7 @@ class UserModel(UserValidator):
 
     def __str__(self):
         return (f'\nИмя Пользователя: {self.username}\n'
-                f'Role: {self.role}'
+                f'Статус: {self.role}'
                 f'{self.show_user_balance()}'
                 f'{self.show_user_transactions()}')
 
@@ -125,29 +125,27 @@ class UserModel(UserValidator):
                 - Второй элемент кортежа: обновленный баланс после начисления бонуса или нулевого значения.
 
         """
-        chance = randint(0, 100)
+        chance = randint(1, 2)
 
-        if chance > 49:
+        if chance == 2:
             bonus = int(current_user_balance * 0.10)
             current_user_balance += bonus
 
             return bonus, current_user_balance
         return 0, current_user_balance
 
-    def change_user_balance(self, user_db, amount: int, atm_model, atm_db, sub: bool = False) -> None:
-        min_currency = min(atm_model.currencies)
+    def change_user_balance(self, user_db, amount: int, atm_model, atm_view, sub: bool = False) -> None:
+        min_currency = min(atm_model.currency)
         if sub:
             if (self.balance - amount) > -1:
                 if atm_model.balance >= amount:
-                    without_atm_currency = atm_model.count_cash(amount)
+                    without_atm_currency = atm_model.count_cash(amount, atm_model.currency)
                     if without_atm_currency:
-                        atm_model.show_withdrawn_money(without_atm_currency)
                         self.update_user_model(balance=self.balance - amount)
-                        atm_model.change_atm_currency_data(without_atm_currency)
-                        atm_db.update_atm_currencies(atm_id=atm_model.atm_id, new_currency_data=atm_model.currencies)
-                        atm_db.update_atm_balance(atm_model.atm_id, atm_model.get_sum_currency(atm_model.currencies))
+                        atm_view.update_currency_data(currency_data=without_atm_currency)
+                        atm_model.show_withdrawn_money(without_atm_currency)
                     else:
-                        print_message('Банкомат не может выдавать необходимую сумму.')
+                        print_message('Банкомат не может выдать необходимую сумму.')
                         return
                 else:
                     print_message('В банкомате не достаточно средств.')

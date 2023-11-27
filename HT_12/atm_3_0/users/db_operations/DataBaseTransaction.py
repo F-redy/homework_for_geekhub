@@ -1,4 +1,4 @@
-from HT_12.atm_3_0.database_operations.BaseDataBase import BaseDataBase
+from HT_12.atm_3_0.BaseDataBase import BaseDataBase
 
 
 class DataBaseTransaction(BaseDataBase):
@@ -18,7 +18,7 @@ class DataBaseTransaction(BaseDataBase):
         """
 
         query = """INSERT INTO transactions (user_id, type_transaction, amount) VALUES (?,?,?)"""
-        self.execute_query(query, (user_id, type_transaction, amount), is_commit=True)
+        self._execute_query(query, (user_id, type_transaction, amount), is_commit=True)
 
     def get_user_transactions(self, user_id: int) -> list:
         """
@@ -40,5 +40,5 @@ class DataBaseTransaction(BaseDataBase):
         WHERE user_id = ?
         ORDER BY created_at DESC
         """
-        self.execute_query(query, (user_id,))
+        self._execute_query(query, (user_id,))
         return self.cursor.fetchall()

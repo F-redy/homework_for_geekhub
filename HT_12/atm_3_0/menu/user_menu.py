@@ -1,7 +1,6 @@
 from HT_12.atm_3_0.custom_exceptions import ValidationError
 from HT_12.atm_3_0.menu.utils import get_user_choose_menu
 from HT_12.atm_3_0.menu.validators import is_integer
-from HT_12.atm_3_0.users.views import UserView
 
 
 class UserMenu:
@@ -21,12 +20,11 @@ class UserMenu:
         '5. Выход\n',
     ]
 
-    def __init__(self, user_db, atm_model, atm_db):
-        self.user_db = user_db
-        self.atm_db = atm_db
+    def __init__(self, user_view, atm_view):
+        self.user_view = user_view
+        self.atm_view = atm_view
         self.user_model = None
-        self.atm_model = atm_model
-        self.user_view = UserView(user_db)
+        self.atm_model = self.atm_view.atm_model
 
     def login(self):
         user = None
@@ -70,7 +68,7 @@ class UserMenu:
             except ValidationError as e:
                 print(e)
 
-        self.user_model.change_user_balance(self.user_db, amount, self.atm_model, self.atm_db, sub)
+        self.user_model.change_user_balance(self.user_view.user_db, amount, self.atm_model, self.atm_view, sub)
 
     def user_menu(self):
         while True:

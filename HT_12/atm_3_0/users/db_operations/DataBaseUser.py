@@ -1,10 +1,10 @@
+from HT_12.atm_3_0.BaseDataBase import BaseDataBase, sq
 from HT_12.atm_3_0.custom_exceptions.users_exceptions import (
     UserBalanceUpdateError, UserExistsError, UserNotFoundError)
-from HT_12.atm_3_0.database_operations.BaseDataBase import BaseDataBase, sq
 
 
 class DataBaseUser(BaseDataBase):
-    def add_user(self, username: str, hashed_password: str, role: str, balance: int = 0) -> int | None:
+    def add_user(self, username: str, hashed_password: str, role: str, balance: int) -> int | None:
         """
             Создает нового пользователя в базе данных.
 
@@ -18,15 +18,13 @@ class DataBaseUser(BaseDataBase):
                 int | None: Возвращает идентификатор (ID) только что созданного пользователя в базе данных (lastrowid),
                         если пользователь успешно создан, в противном случае возвращает None.
 
-            Keys:
-
             Raises:
                 UserExistsError: Если пользователь с таким именем уже существует в базе данных.
         """
         query = """INSERT INTO users (username, password, role, balance) VALUES (?, ?, ?, ?)"""
 
         try:
-            self.execute_query(query, (username, hashed_password, role, balance), is_commit=True)
+            self._execute_query(query, (username, hashed_password, role, balance), is_commit=True)
         except sq.IntegrityError:
             raise UserExistsError(f"Пользователь {username.capitalize()} уже существует!")
 
@@ -34,23 +32,23 @@ class DataBaseUser(BaseDataBase):
 
     def get_user(self, username: str) -> dict | None:
         """
-            Получает информацию о пользователе из базы данных.
+        Получает информацию о пользователе из базы данных.
 
-            Args:
-                username (str): Имя пользователя, информацию о котором нужно получить.
+        Args:
+            username (str): Имя пользователя, информацию о котором нужно получить.
 
-            Returns:
-                dict | None: Возвращает информацию о пользователе в виде словопря, если пользователь существует.
+        Returns:
+            dict | None: Возвращает информацию о пользователе в виде словопря, если пользователь существует.
 
-            Keys:
-            'id';'username';'password';'role';'balance';'created_at';'updated_at'
+        Keys:
+        'id';'username';'password';'role';'balance';'created_at';'updated_at'
 
-            Raises:
-                UserNotFoundError: Если пользователь с указанным именем не найден в базе данных.
+        Raises:
+            UserNotFoundError: Если пользователь с указанным именем не найден в базе данных.
         """
 
         query = """SELECT id, username, password, role, balance, created_at, updated_at FROM users WHERE username = ?"""
-        self.execute_query(query, (username,))
+        self._execute_query(query, (username,))
 
         user = self.cursor.fetchone()
 
@@ -84,25 +82,6 @@ class DataBaseUser(BaseDataBase):
         """
 
         try:
-            self.execute_query(query, (new_balance, user_id), is_commit=True)
+            self._execute_query(query, (new_balance, user_id), is_commit=True)
         except sq.Error as e:
             raise UserBalanceUpdateError(f"Ошибка при обновлении баланса пользователя с ID {user_id}: {e}")
-
-    def delete_user(self, user_id: int):
-        """
-        Удаляет пользователя из базы данных.
-
-        Args:
-            user_id (int): ID пользователя, которого необходимо удалить.
-
-        Returns: None
-        """
-        query = """
-        DELETE FROM users
-        WHERE id = ?
-        """
-
-        try:
-            self.execute_query(query, (user_id,), is_commit=True)
-        except sq.Error as e:
-            raise UserNotFoundError(f"Ошибка при удалении пользователя с ID {user_id}: {e}")

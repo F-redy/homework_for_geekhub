@@ -1,9 +1,9 @@
-from HT_12.atm_3_0.database_operations.users.DataBaseTransaction import \
+from HT_12.atm_3_0.users.db_operations.DataBaseTransaction import \
     DataBaseTransaction
-from HT_12.atm_3_0.database_operations.users.DataBaseUser import DataBaseUser
+from HT_12.atm_3_0.users.db_operations.DataBaseUser import DataBaseUser
 
 
-class UserDB(DataBaseUser, DataBaseTransaction):
+class DBUser(DataBaseUser, DataBaseTransaction):
     """
         Объединенный класс для работы с пользователями и транзакциями пользователей.
 
