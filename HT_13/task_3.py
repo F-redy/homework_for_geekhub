@@ -19,4 +19,6 @@ if __name__ == '__main__':
     obj_3 = Counter()
 
     obj_1.show_counter()
+    obj_2.show_counter()
+    obj_3.show_counter()
     Counter.show_counter()
