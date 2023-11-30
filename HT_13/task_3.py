@@ -2,15 +2,10 @@
 # Створіть клас в якому буде атребут який буде рахувати кількість створених екземплярів класів.
 
 class Counter:
-    __COUNT = 0
+    count = 0
 
-    def __new__(cls, *args, **kwargs):
-        cls.__COUNT += 1
-        return cls
-
-    @classmethod
-    def show_counter(cls):
-        print(cls.__COUNT)
+    def __init__(self):
+        Counter.count += 1
 
 
 if __name__ == '__main__':
@@ -18,7 +13,6 @@ if __name__ == '__main__':
     obj_2 = Counter()
     obj_3 = Counter()
 
-    obj_1.show_counter()
-    obj_2.show_counter()
-    obj_3.show_counter()
-    Counter.show_counter()
+    print(obj_1.count)
+    print(obj_2.count)
+    print(obj_3.count)
