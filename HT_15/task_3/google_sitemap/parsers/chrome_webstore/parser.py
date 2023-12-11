@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
-
-from google_sitemap.parsers.chrome_webstore.dataclasses import (
-    LocationItem, LocationItemData, SitemapItem)
+from google_sitemap.parsers.chrome_webstore.dataclasses import LocationItem  # isort:split
+from google_sitemap.parsers.chrome_webstore.dataclasses import LocationItemData  # isort:split
+from google_sitemap.parsers.chrome_webstore.dataclasses import SitemapItem  # isort:split
 
 
 class GoogleChromeParser:
