@@ -2,11 +2,10 @@ from typing import Any
 from urllib.parse import urljoin
 
 import scrapy
-from scrapy import Request
-from scrapy.http import Response
-
 from google_sitemap.items import GoogleSitemapItem
 from google_sitemap.parsers.chrome_webstore.parser import GoogleChromeParser
+from scrapy import Request
+from scrapy.http import Response
 
 
 class GoogleCrawlSpider(scrapy.Spider):
