@@ -2,6 +2,14 @@ body {
     background: white url("images/background.png") no-repeat;
 }
 
+ul {
+    list-style: none;
+}
+
 li a {
     color: green;
+}
+
+fieldset {
+    border: none;
 }
