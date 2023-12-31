@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="add-products">
+        <h1>Add Product IDs</h1>
+        <form method="post">
+            {% csrf_token %}
+            <textarea class="text-products" name="product-ids" cols="80" rows="10" placeholder="{{ placeholder }}"
+                      required></textarea>
+            <input class="button-add-products" type="submit" value="Add Products">
+        </form>
+    </div>
+{% endblock %}

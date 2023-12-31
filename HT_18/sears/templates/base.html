@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title|safe }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'products/css/styles.css' %}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carattere&family=Caveat:wght@500&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div class="body-wrapper">
+    <!-- navigation -->
+    {% include "inc/navigation.html" %}
+
+    <div class="content-wrapper">
+        {% block content %}{% endblock %}
+    </div>
+
+</div>
+
+</body>
+</html>

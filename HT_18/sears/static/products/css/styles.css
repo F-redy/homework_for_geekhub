@@ -1,0 +1,273 @@
+body {
+    background: url('../images/background-body.jpg');
+    background-size: cover;
+}
+
+.body-wrapper {
+    position: relative;
+    width: 80%;
+    height: 90%;
+    min-height: 800px;
+    min-width: 800px;
+    margin: 15px auto;
+    padding: 20px 40px 20px 40px;
+    color: #3d3737;
+    background-color: rgba(217, 217, 217, 0.82);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    font-family: sans-serif;
+}
+
+.body-wrapper h1 {
+    font-family: 'Caveat', cursive;
+}
+
+/* menu styles */
+.menu-wrapper {
+    display: flex;
+    justify-content: center;
+    font-family: espiritu, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+ul.menu {
+    width: 50%;
+    list-style-type: none;
+    margin: 20px 30px 30px 30px;
+    padding: 5px;
+    border-bottom: 3px solid rgb(255, 255, 255);
+}
+
+ul.menu li {
+    display: inline;
+    margin-right: 15px;
+}
+
+ul.menu a {
+    text-decoration: none;
+    color: rgba(10, 0, 0, 0.94);
+    transition: color 0.3s;
+}
+
+ul.menu a:hover {
+    color: #ff6600;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* products table styles */
+.products-wrapper {
+    max-width: 100%;
+}
+
+.products-wrapper h1 {
+    text-align: center;
+}
+
+table.products {
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table.products th, td {
+    padding: 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+table.products th, td {
+    background-color: #f2f2f2;
+}
+
+table.products a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.1ms;
+}
+
+table.products a:hover {
+    padding: 5px;
+    color: white;
+    background-color: #005f77;
+    transition: background-color 0.3s;
+}
+
+
+/* add product ids */
+.text-products {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.button-add-products {
+    display: flex;
+    margin-left: auto;
+    margin-right: -20px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.button-add-products:hover {
+    background-color: #005f77;
+}
+
+.add-products h1 {
+    text-align: center;
+}
+
+/* detail product styles*/
+.wrapper-product {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(5, 27, 140, 0.24);
+}
+
+.wrapper-img {
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper-img img {
+    width: 350px;
+    height: 400px;
+}
+
+.wrapper-product h2 {
+    text-align: center;
+}
+
+ul.product {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.product li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.product-label {
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+    width: 150px;
+}
+
+.product-info {
+    display: inline-block;
+    color: #666;
+}
+
+.product-info a {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.product-info a:hover {
+    color: #ff6600;
+}
+
+/* task styles */
+.task {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+}
+
+.task h1 {
+    text-align: center;
+}
+
+.task a {
+    text-decoration: none;
+    color: #333333;
+    transition: color 0.3s;
+}
+
+.task a:hover {
+    color: #ff6600;
+}
+
+/* messages */
+.messages {
+    position: relative;
+    list-style: none;
+    width: max-content;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.close-message {
+    color: rgba(16, 15, 15, 0.68);
+    font-weight: bold;
+    font-size: 24px;
+    position: absolute;
+    top: -3px;
+    right: 3px;
+    cursor: pointer;
+}
+
+.success {
+    padding: 15px 20px;
+    background-color: green;
+    border-radius: 10px;
+}
+
+.error {
+    padding: 15px;
+    background-color: red;
+    border-radius: 10px
+}
+
+/* pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.step-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-links a {
+    padding: 5px 10px;
+    margin: 0 3px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #008CBA;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+}
+
+.step-links a:hover {
+    background-color: #005f77;
+}
+
+.current {
+    padding: 5px 10px;
+    margin: 0 3px;
+    font-weight: bold;
+}
