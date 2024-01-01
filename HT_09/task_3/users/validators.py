@@ -1,6 +1,6 @@
 from HT_09.task_3 import settings
-from HT_09.task_3.users.custom_exceptions import (UserExistsError,
-                                                  ValidationError)
+from HT_09.task_3.users.custom_exceptions import UserExistsError
+from HT_09.task_3.users.custom_exceptions import ValidationError
 from HT_09.task_3.users.utils import hash_password
 
 

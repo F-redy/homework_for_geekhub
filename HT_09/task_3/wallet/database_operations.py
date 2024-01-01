@@ -3,8 +3,8 @@ import json
 from HT_09.task_3 import settings
 from HT_09.task_3.errors.models import ErrorLogger
 from HT_09.task_3.users.utils import get_create_at
-from HT_09.task_3.wallet.utils import (get_path_to_user_balance,
-                                       get_path_to_user_transactions)
+from HT_09.task_3.wallet.utils import get_path_to_user_balance
+from HT_09.task_3.wallet.utils import get_path_to_user_transactions
 from HT_09.task_3.wallet.validators import validate_transaction_input
 
 logger = ErrorLogger()

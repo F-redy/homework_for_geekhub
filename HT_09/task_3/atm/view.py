@@ -1,5 +1,6 @@
 from HT_09.task_3 import settings
-from HT_09.task_3.users.view import authenticate_user, register_user
+from HT_09.task_3.users.view import authenticate_user
+from HT_09.task_3.users.view import register_user
 
 
 def login() -> dict | None:

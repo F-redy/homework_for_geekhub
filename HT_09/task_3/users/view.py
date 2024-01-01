@@ -1,6 +1,7 @@
 from HT_09.task_3.users import custom_exceptions
-from HT_09.task_3.users.database_operations import (get_user, read_users,
-                                                    write_user)
+from HT_09.task_3.users.database_operations import get_user
+from HT_09.task_3.users.database_operations import read_users
+from HT_09.task_3.users.database_operations import write_user
 from HT_09.task_3.users.models import custom_user
 from HT_09.task_3.users.validators import does_user_exist
 

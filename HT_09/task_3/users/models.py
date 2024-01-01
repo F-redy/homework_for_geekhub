@@ -1,6 +1,7 @@
 from HT_09.task_3.users import custom_exceptions
 from HT_09.task_3.users.utils import get_create_at
-from HT_09.task_3.users.validators import validate_password, validate_username
+from HT_09.task_3.users.validators import validate_password
+from HT_09.task_3.users.validators import validate_username
 from HT_09.task_3.wallet.models import create_wallet
 
 

@@ -1,10 +1,10 @@
 from HT_09.task_3.errors.models import ErrorLogger
 from HT_09.task_3.users.utils import get_create_at
-from HT_09.task_3.wallet.database_operations import (change_transactions,
-                                                     change_user_balance,
-                                                     get_user_balance)
-from HT_09.task_3.wallet.validators import (check_balance_for_transaction,
-                                            validate_transaction_input)
+from HT_09.task_3.wallet.database_operations import change_transactions
+from HT_09.task_3.wallet.database_operations import change_user_balance
+from HT_09.task_3.wallet.database_operations import get_user_balance
+from HT_09.task_3.wallet.validators import check_balance_for_transaction
+from HT_09.task_3.wallet.validators import validate_transaction_input
 
 logger = ErrorLogger()
 
