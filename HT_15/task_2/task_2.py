@@ -5,7 +5,9 @@
 
 import csv
 import http
-from dataclasses import asdict, dataclass, fields
+from dataclasses import asdict
+from dataclasses import dataclass
+from dataclasses import fields
 from time import sleep
 from urllib.parse import urljoin
 
