@@ -4,7 +4,8 @@
 # У випадку некоректного введеного значення - виводити відповідне повідомлення.
 
 
-from HT_05.common import UnsupportedColorError, colorize_text
+from HT_05.common import colorize_text
+from HT_05.common import UnsupportedColorError
 
 SEASONS = {
     f'{colorize_text("Зима", "blue")}': (12, 1, 2),
