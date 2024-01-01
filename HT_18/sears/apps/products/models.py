@@ -17,7 +17,6 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        # return f'{self.name} | {self.final_price} | {self.category}'
         return f'{self.product_id}'
 
     def get_absolute_url(self):
