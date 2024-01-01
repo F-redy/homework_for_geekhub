@@ -39,7 +39,7 @@ class ScraperSears:
 
     def scrape(self, item_id):
         response = requests.get(
-            f'https://www.sears.com/api/sal/v3/products/details/{self.get_clean_id(item_id)}?'
+            f'https://www.sears.com/api/sal/v3/products/details/{self.__get_clean_id(item_id)}?'
             f'storeName=Sears&memberStatus=G&zipCode=10101',
             headers=self.HEADERS)
 
@@ -73,7 +73,7 @@ class ScraperSears:
         return float(price)
 
     @staticmethod
-    def get_clean_id(input_id: str) -> str:
+    def __get_clean_id(input_id: str) -> str:
         if input_id.startswith('p-'):
             return input_id[2:]
         return input_id
