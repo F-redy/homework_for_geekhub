@@ -1,8 +1,8 @@
 from HT_14.atm_4_0.common.custom_messages import print_message
-from HT_14.atm_4_0.custom_exceptions import (IncorrectPasswordError,
-                                             UserExistsError,
-                                             UserNotFoundError,
-                                             ValidationError)
+from HT_14.atm_4_0.custom_exceptions import IncorrectPasswordError
+from HT_14.atm_4_0.custom_exceptions import UserExistsError
+from HT_14.atm_4_0.custom_exceptions import UserNotFoundError
+from HT_14.atm_4_0.custom_exceptions import ValidationError
 from HT_14.atm_4_0.users.db_operations.DBUser import DBUser
 from HT_14.atm_4_0.users.models import UserModel
 from HT_14.atm_4_0.users.utils import hash_password
