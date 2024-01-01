@@ -1,4 +1,5 @@
-from HT_12.atm_3_0.custom_exceptions import ATMBalanceError, ATMCurrencyError
+from HT_12.atm_3_0.custom_exceptions import ATMBalanceError
+from HT_12.atm_3_0.custom_exceptions import ATMCurrencyError
 from HT_12.atm_3_0.settings import ALLOWED_CURRENCY
 
 

@@ -1,4 +1,5 @@
-from HT_12.atm_3_0.BaseDataBase import BaseDataBase, sq
+from HT_12.atm_3_0.BaseDataBase import BaseDataBase
+from HT_12.atm_3_0.BaseDataBase import sq
 from HT_12.atm_3_0.custom_exceptions.atm_exceptions import ATMCurrencyError
 
 
