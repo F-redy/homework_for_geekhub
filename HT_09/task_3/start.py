@@ -5,11 +5,13 @@ if __name__ == '__main__':
     sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from HT_09.task_3.atm.menu import menu
-from HT_09.task_3.atm.view import login, registration
+from HT_09.task_3.atm.view import login
+from HT_09.task_3.atm.view import registration
 from HT_09.task_3.users.view import register_user
 from HT_09.task_3.wallet.database_operations import get_user_balance
 from HT_09.task_3.wallet.validators import validate_transaction_input
-from HT_09.task_3.wallet.view import add_user_balance, sub_user_balance
+from HT_09.task_3.wallet.view import add_user_balance
+from HT_09.task_3.wallet.view import sub_user_balance
 
 
 def create_base_client():
