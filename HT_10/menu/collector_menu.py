@@ -1,10 +1,11 @@
-from HT_10.atm.database_operations.atm_currency_operations import \
-    update_atm_currencies
-from HT_10.atm.views import change_atm_balance, get_atm_info
+from HT_10.atm.database_operations.atm_currency_operations import update_atm_currencies
+from HT_10.atm.views import change_atm_balance
+from HT_10.atm.views import get_atm_info
 from HT_10.menu.custom_exceptions import ValidationError
 from HT_10.menu.utils import get_user_choose_menu
-from HT_10.menu.validators import (is_integer, validate_denomination,
-                                   validate_quantity)
+from HT_10.menu.validators import is_integer
+from HT_10.menu.validators import validate_denomination
+from HT_10.menu.validators import validate_quantity
 
 
 class CollectorMenu:

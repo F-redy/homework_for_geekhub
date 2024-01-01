@@ -1,10 +1,11 @@
 from HT_10.menu.custom_exceptions import ValidationError
-from HT_10.menu.utils import get_user_choose_menu, withdrawal_user_balance
+from HT_10.menu.utils import get_user_choose_menu
+from HT_10.menu.utils import withdrawal_user_balance
 from HT_10.menu.validators import is_integer
-from HT_10.users.database_operations.transaction_operations import \
-    get_user_transactions
-from HT_10.users.views import (authenticate_user, change_user_balance,
-                               register_user)
+from HT_10.users.database_operations.transaction_operations import get_user_transactions
+from HT_10.users.views import authenticate_user
+from HT_10.users.views import change_user_balance
+from HT_10.users.views import register_user
 
 
 class UserMenu:

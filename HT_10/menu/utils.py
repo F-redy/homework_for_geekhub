@@ -1,4 +1,5 @@
-from HT_10.atm.views import change_atm_balance, get_atm_info
+from HT_10.atm.views import change_atm_balance
+from HT_10.atm.views import get_atm_info
 
 
 def print_menu(memu):

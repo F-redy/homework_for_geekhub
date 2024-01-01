@@ -1,8 +1,8 @@
 from HT_10.database_operations import sq
-from HT_10.users.custom_exceptions import (UserBalanceUpdateError,
-                                           UserExistsError, UserNotFoundError)
-from HT_10.users.database_operations.transaction_operations import \
-    create_user_transaction
+from HT_10.users.custom_exceptions import UserBalanceUpdateError
+from HT_10.users.custom_exceptions import UserExistsError
+from HT_10.users.custom_exceptions import UserNotFoundError
+from HT_10.users.database_operations.transaction_operations import create_user_transaction
 
 
 def add_user(connect: sq.Connection, username: str, hashed_password: str, role: str,

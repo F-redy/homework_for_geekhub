@@ -1,5 +1,7 @@
-from HT_10.users.validators import (validate_password, validate_role,
-                                    validate_user_balance, validate_username)
+from HT_10.users.validators import validate_password
+from HT_10.users.validators import validate_role
+from HT_10.users.validators import validate_user_balance
+from HT_10.users.validators import validate_username
 
 
 def user_model(username: str, password: str, role: str = 'user', balance: float = 0.0) -> dict:
