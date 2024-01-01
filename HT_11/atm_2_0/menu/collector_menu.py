@@ -35,8 +35,8 @@ class CollectorMenu:
             except ATMCurrencyError as e:
                 print(e)
 
-        currency_data = {denomination: quantity}
-        self.atm_db.update_atm_currencies(self.atm_model.atm_id, currency_data)
+        currency_data = [(denomination, quantity)]
+        self.atm_db.update_atm_currencies(currency_data)
 
         self.atm_model.update_atm_data(self.atm_db, self.atm_model.atm_id)
         print('\nОперация прошла успешно.\n')
