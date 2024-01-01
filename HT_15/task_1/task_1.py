@@ -113,7 +113,7 @@ class SearsScraper:
 
                 if self.meta_count < end_index:
                     print('The program is completed.'
-                          f'\nTotal products received {self.total_products} from {self.meta_count}.')
+                          f'\nTotal scraper received {self.total_products} from {self.meta_count}.')
                     break
 
                 print(f'Sleeping for {self.timer_sleep} seconds...')
@@ -125,7 +125,7 @@ class SearsScraper:
 
             else:
                 print(f'Program finished with an error. {response.status_code}'
-                      f'\nA total of {self.total_products} products out of {self.meta_count} were received.')
+                      f'\nA total of {self.total_products} scraper out of {self.meta_count} were received.')
                 break
 
 
