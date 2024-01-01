@@ -1,7 +1,8 @@
 from HT_14.atm_4_0.atms.DBATMCurrency import DataBaseATMCurrency
 from HT_14.atm_4_0.atms.models import ATMModel
 from HT_14.atm_4_0.common.custom_messages import print_message
-from HT_14.atm_4_0.custom_exceptions import ATMBalanceError, ATMCurrencyError
+from HT_14.atm_4_0.custom_exceptions import ATMBalanceError
+from HT_14.atm_4_0.custom_exceptions import ATMCurrencyError
 
 
 class ATMView:

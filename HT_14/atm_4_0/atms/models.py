@@ -2,6 +2,7 @@ import http
 from datetime import datetime
 
 import requests
+
 from HT_14.atm_4_0.atms.Algorithm import Algorithm
 from HT_14.atm_4_0.atms.validators import ATMValidator
 
