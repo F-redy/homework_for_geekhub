@@ -16,8 +16,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from xhtml2pdf import pisa
 
 from HT_16.chrom_driver import CustomChromeDriver
-from HT_16.custom_dataclasses import RobotReceipt
 from HT_16.csv_order_reader import CSVOrderReader
+from HT_16.custom_dataclasses import RobotReceipt
 
 
 class RobotOrderAutomation:
