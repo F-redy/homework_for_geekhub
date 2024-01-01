@@ -4,7 +4,8 @@ if __name__ == '__main__':
 
     sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-from database_operations import ATMDataBase, UserDB
+from database_operations import ATMDataBase
+from database_operations import UserDB
 
 from HT_11.atm_2_0.atms.views import ATMView
 from HT_11.atm_2_0.custom_exceptions import UserExistsError
