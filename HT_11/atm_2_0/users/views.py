@@ -1,7 +1,7 @@
-from HT_11.atm_2_0.custom_exceptions import (IncorrectPasswordError,
-                                             UserExistsError,
-                                             UserNotFoundError,
-                                             ValidationError)
+from HT_11.atm_2_0.custom_exceptions import IncorrectPasswordError
+from HT_11.atm_2_0.custom_exceptions import UserExistsError
+from HT_11.atm_2_0.custom_exceptions import UserNotFoundError
+from HT_11.atm_2_0.custom_exceptions import ValidationError
 from HT_11.atm_2_0.users.models import UserModel
 from HT_11.atm_2_0.users.utils import hash_password
 
