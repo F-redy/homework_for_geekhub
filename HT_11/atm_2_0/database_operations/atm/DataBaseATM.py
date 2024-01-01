@@ -1,5 +1,6 @@
 from HT_11.atm_2_0.custom_exceptions.atm_exceptions import ATMError
-from HT_11.atm_2_0.database_operations.BaseDataBase import BaseDataBase, sq
+from HT_11.atm_2_0.database_operations.BaseDataBase import BaseDataBase
+from HT_11.atm_2_0.database_operations.BaseDataBase import sq
 
 
 class DataBaseATM(BaseDataBase):

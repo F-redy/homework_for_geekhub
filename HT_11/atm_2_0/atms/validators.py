@@ -1,5 +1,6 @@
-from HT_11.atm_2_0.custom_exceptions import (ATMBalanceError, ATMCurrencyError,
-                                             ATMError)
+from HT_11.atm_2_0.custom_exceptions import ATMBalanceError
+from HT_11.atm_2_0.custom_exceptions import ATMCurrencyError
+from HT_11.atm_2_0.custom_exceptions import ATMError
 from HT_11.atm_2_0.settings import ALLOWED_CURRENCY
 
 

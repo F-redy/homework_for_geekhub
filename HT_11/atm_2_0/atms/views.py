@@ -1,5 +1,6 @@
 from HT_11.atm_2_0.atms.models import ATMModel
-from HT_11.atm_2_0.custom_exceptions import ATMBalanceError, ATMCurrencyError
+from HT_11.atm_2_0.custom_exceptions import ATMBalanceError
+from HT_11.atm_2_0.custom_exceptions import ATMCurrencyError
 
 
 class ATMView:
