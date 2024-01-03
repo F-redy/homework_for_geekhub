@@ -6,16 +6,24 @@ if __name__ == "__main__":
     sys.path.append(str(current_dir))
 
 from dataclasses import asdict
-
 from time import sleep
 
 import django
+from loguru import logger
 
 django.setup()
 
 from scraper_sears import ScraperSears
 
 from apps.products.models import Product
+
+logger.add('log/errors_log.json',
+           filter=lambda record: record["level"].name == "ERROR",
+           format='{time} {level} {message}',
+           level='DEBUG',
+           rotation='10 MB',
+           compression='zip',
+           serialize=True)
 
 
 def get_product_ids():
@@ -31,14 +39,15 @@ def start():
     for item in get_product_ids():
         try:
             product = scraper.scrape(item)
-            print(f'scraped {item} - OK')
-            Product.objects.update_or_create(**asdict(product))
+            if product:
+                Product.objects.update_or_create(**asdict(product))
+                logger.info(f'scraped "{item}" - OK')
 
-        except Exception as e:
-            print(f'Error  with "{item}": {e}')
+        except AttributeError:
+            logger.error(f'Invalid id "{item}".')
 
         sleep(20)
-    print('Finished scraping')
+    logger.info('Finished scraping')
 
 
 if __name__ == '__main__':
