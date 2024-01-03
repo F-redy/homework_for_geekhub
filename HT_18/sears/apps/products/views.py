@@ -3,11 +3,13 @@ from subprocess import Popen
 
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView
+from django.views.generic import FormView
 from django.views.generic import ListView
 
+from apps.products.forms import AddProductForm
 from apps.products.models import Product
 
 
@@ -38,30 +40,25 @@ class ProductDetailView(DetailView):
         return context
 
 
-def add_products(request):
-    if request.method == 'POST':
-        product_ids = request.POST.get('product-ids')
+class AddProductsFormView(FormView):
+    template_name = 'products/add_product.html'
+    form_class = AddProductForm
+    success_url = reverse_lazy('products:my_products')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Add Products'
+        return context
+
+    def form_valid(self, form):
+        product_ids = form.cleaned_data['user_input']
         try:
             Popen([sys.executable, 'services/scraper/subscraper.py', product_ids])
-            messages.success(request, 'Data processing. It can take some time...')
-
+            messages.success(self.request, 'Data processing. It can take some time...')
         except Exception:
-            messages.error(request, 'Error: Scraping Process Invalid')
+            messages.error(self.request, 'Error: Scraping Process Invalid')
 
-        return redirect('products:my_products')
-
-    else:
-        context = {
-            'placeholder': 'Enter ID separated by new line(example):'
-                           '\np-00935112000P\np-A075482002\np-00937537000P\np-A119540351'
-                           '\np-0000000000000000697300000000000007464308P'
-                           '\np-A116635279\np-SPM10450584608\np-A085642481'
-                           '\np-00602692000P\np-A011991588\np-A119988757',
-            'title': 'Add Product'
-        }
-
-        return render(request, 'products/add_product.html', context=context)
+        return super(AddProductsFormView, self).form_valid(form)
 
 
 def task(request):
