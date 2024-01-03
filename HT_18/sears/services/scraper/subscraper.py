@@ -17,7 +17,7 @@ from scraper_sears import ScraperSears
 
 from apps.products.models import Product
 
-logger.add('log/errors_log.json',
+logger.add('logs/errors_log.json',
            filter=lambda record: record["level"].name == "ERROR",
            format='{time} {level} {message}',
            level='DEBUG',
