@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="basket-wrapper">
+        <!-- messages -->
+        {% include "inc/messages.html" %}
+
+        <h1 class="basket-title"> Basket </h1>
+        <div class="basket-product">
+            {% for product_id, product in request.session.baskets.items %}
+                <div class="basket-item">
+                    <div class="product-name">
+                        <a href="{% url 'products:detail_product' product_id %}" id="name">{{ product.name|safe }}</a>
+                    </div>
+                    <div class="product-info">
+                        <!-- Change quantity, product-info -->
+                        <div class="wrapper-quantity">
+                            <a href="{% url 'baskets:sub-product' product_id %}">
+                                <button class="decrement-btn" type="submit">-</button>
+                            </a>
+                            <form action="{% url 'baskets:change-basket' product_id %}" method="POST">
+                                {% csrf_token %}
+                                <label for="quantity">
+                                    <input type="number" class="quantity" name="quantity" value="{{ product.quantity }}"
+                                           min="1" max="100">
+                                </label>
+                            </form>
+                            <a href="{% url 'baskets:add-product' product_id %}">
+                                <button class="increment-btn" type="submit">+</button>
+                            </a>
+
+                        </div>
+
+                        <div class="price"> x {{ product.price|floatformat:2 }} $ =</div>
+                        <div class="total-price">{{ product.total_price|floatformat:2 }} $</div>
+
+                        <div>
+                            <a href="{% url 'baskets:remove' product_id=product_id %}">
+                                <img src="{% static 'basket/icons/basket.svg' %}" alt="Basket Icon" class="basket-icon">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Order, Clear, Total Price Cart-->
+        {% if request.session.baskets %}
+            <div class="basket-buttons-container">
+                <div class="wrapper-order">
+                    <div class="order">
+                        <a href="#">
+                            <input type="submit" value="Order">
+                        </a>
+                        <span class="order-price">Total Price: {{ request.session.total_price|floatformat:2 }} $</span>
+                    </div>
+                </div>
+                <div class="clear-basket">
+                    <a href="{% url 'baskets:clear_basket' %}">
+                        <input type="submit" value="Clear Basket">
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <h3 class="empty-basket">No products in the basket</h3>
+        {% endif %}
+    </div>
+{% endblock %}

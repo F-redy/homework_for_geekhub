@@ -1,0 +1,14 @@
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <span class="close-message" onclick="closeMessage(this)">&times;</span>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<script>
+    function closeMessage(element) {
+        element.parentElement.style.display = 'none';
+    }
+</script>

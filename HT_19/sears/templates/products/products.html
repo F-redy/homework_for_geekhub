@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="products-wrapper">
+        <!-- messages -->
+        {% include 'inc/messages.html' %}
+
+        <h1>{{ title }}</h1>
+
+        <table class="products">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody class="products-text">
+            {% for product in products_list %}
+                <tr>
+                    <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
+                    <td><a href="{{ product.get_absolute_url }}">{{ product.name|safe }}</a></td>
+                    <td>{{ product.final_price }}$</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    
+        <!-- Pagination -->
+        {% include 'inc/pagination.html' %}
+    </div>
+
+
+
+{% endblock %}
