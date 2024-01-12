@@ -54,7 +54,7 @@ def start():
         try:
             scraper_process(item)
         except JSONDecodeError:
-            logger.info(f'Sleeping for {timer} seconds {item}.')
+            logger.info(f'Sleeping {timer} seconds {item}.')
             sleep(timer)
             scraper_process(item)
         except Exception as e:
