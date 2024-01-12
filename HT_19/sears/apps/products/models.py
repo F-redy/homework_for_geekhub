@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Product(models.Model):
-    product_id = models.CharField(max_length=200)
+    product_id = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=200)
     brand = models.CharField(max_length=200)
     category = models.CharField(max_length=200)
