@@ -1,0 +1,9 @@
+#!/usr/bin/env bush
+
+docker-compose build
+docker-compose up -d backend
+
+bash bin/manage makemigrations
+bash bin/manage migrate
+
+docker-compose up
