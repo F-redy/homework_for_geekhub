@@ -7,7 +7,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     brand = models.CharField(max_length=200)
     category = models.CharField(max_length=200)
-    image_url = models.CharField(max_length=300, blank=True)
+    image_url = models.TextField(blank=True)
     base_price = models.FloatField()
     final_price = models.FloatField()
     savings_price = models.FloatField(default=0.0)
