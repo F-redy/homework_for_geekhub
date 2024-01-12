@@ -18,6 +18,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
     search_fields = ('product_id',)
     list_filter = ['created_at', 'updated_at']
+    list_per_page = 10
 
     def view_product_url(self, obj):
         return format_html(f'<a href="{obj.get_absolute_url()}" target="_blank">view on site</a>')
