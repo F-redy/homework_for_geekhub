@@ -3,11 +3,11 @@ from django.urls import reverse
 
 
 class Product(models.Model):
-    product_id = models.CharField('ID', max_length=125)
-    name = models.CharField(max_length=125)
-    brand = models.CharField(max_length=125)
-    category = models.CharField(max_length=125)
-    image_url = models.URLField(blank=True)
+    product_id = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    brand = models.CharField(max_length=200)
+    category = models.CharField(max_length=200)
+    image_url = models.CharField(max_length=300, blank=True)
     base_price = models.FloatField()
     final_price = models.FloatField()
     savings_price = models.FloatField(default=0.0)
