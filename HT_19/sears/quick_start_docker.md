@@ -10,8 +10,8 @@
    ```bash
     cd homework_for_geekhub/HT_19/sears
     ```
-   
 3. **Start project:**
+
    ### Prerequisites
 
    Make sure you have Docker and Docker Compose installed on your machine.
