@@ -44,6 +44,8 @@ def scraper_process(item):
             logger.info(f'scraped "{item}" - OK')
     except AttributeError as e:
         logger.error(e)
+    except Exception as e:
+        logger.error(e)
 
 
 def start():
