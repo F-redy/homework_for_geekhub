@@ -42,8 +42,8 @@ def scraper_process(item):
         if product:
             Product.objects.update_or_create(**asdict(product))
             logger.info(f'scraped "{item}" - OK')
-    except AttributeError:
-        logger.error(f'Invalid id "{item}".')
+    except AttributeError as e:
+        logger.error(e)
 
 
 def start():
@@ -55,8 +55,8 @@ def start():
             logger.info(f'Sleeping for {timer} seconds {item}.')
             sleep(timer)
             scraper_process(item)
-        except Exception:
-            logger.error(f'Invalid id "{item}".')
+        except Exception as e:
+            logger.error(e)
 
     logger.info('Finished scraping')
 
