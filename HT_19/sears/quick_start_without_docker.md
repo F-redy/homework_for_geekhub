@@ -1,4 +1,4 @@
-## Quick start
+## Quick start without Docker
 
 1. **Clone the repository:**
 
@@ -8,7 +8,7 @@
 2. **Navigate to the project directory:**
 
    ```bash
-    cd HT_19\sears
+    cd homework_for_geekhub/HT_19/sears
     ```
 3. **Create a virtual environment:**
    For Windows:
@@ -27,7 +27,7 @@
 4. **Install the required packages:**
 
     ```bash
-    pip install -r requirements/production.txt
+    pip install -r requirements/development.txt
     ```
 
 5. **Set up environment variables:**
@@ -37,15 +37,47 @@
    ### `.env-example`
 
    The `.env-example` file contains examples of the required environment variables:
-
+   
    ```plaintext
     SECRET_KEY=enter_yor_key
     DEBUG=on
+    DATABASE_URL=postgres://db_user:db_password@db/db_name
+   ```
+   **Note:**
+   
+    Ensure you configure the database properly by updating `DATABASE_URL` with your PostgreSQL credentials.
+
+   ### Setting Postgres:
+
+   [Django Docs](https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-DATABASES)   
+
+   ### Alternatively
+ 
+    You can switch to `SQLite` in the [settings](./settings/base.py) file:
+
+   **paste:**
+
+    ```plaintext
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+   ```
+
+   **delete:**
+
+    ```plaintext
+    DATABASES = {
+        "default": env.db('DATABASE_URL')
+    }
    ```
 
 6. **Run migrations:**
 
     ```bash
+    python manage.py makemigrations
     python manage.py migrate
     ```
 
@@ -61,19 +93,3 @@
     ```bash
     python manage.py runserver
     ```
-
-9. **Access the development server:**
-
-    - Visit [add-products](http://127.0.0.1:8000/products/add-products/). And add product IDs for scraping
-      from [site](https://www.sears.com/).
-        - example ID:
-            - `p-A093086676`
-            - `p-SPM6458104507`
-            - `p-SPM9463331817`
-    - On the page [products](http://127.0.0.1:8000/products/). You can see the products after scraping.
-    - On the page http://127.0.0.1:8000/products/detail-product/ `id-product`. You can see detailed information about
-      the product and add product to cart.
-    - On the page [basket](http://127.0.0.1:8000/basket/). You can see all the products you ordered... Change their
-      quantity, delete one product or empty the entire cart.
-    - On the page [task](http://127.0.0.1:8000/task/). You can read about the project task.
-    - On the page [admin-site](http://127.0.0.1:8000/admin/products/product/). You can select any product and change it.
