@@ -5,7 +5,7 @@
 - [Task](./task.md)
 - [About Project](./about_project.md)
 - [Quick Start with Docker (recommend)](./quick_start_docker.md)
-- [Quick Start without Docker](./quick_start_without_docker)
+- [Quick Start without Docker](./quick_start_without_docker.md)
 
 ## Accessing the Development Server and Features:
 
