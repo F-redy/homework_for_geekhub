@@ -10,7 +10,22 @@
    ```bash
     cd homework_for_geekhub/HT_19/sears
     ```
-3. **Start project:**
+
+3.  **Set up environment variables:**
+
+    - Create a `.env` file in the root directory based on `.env-example`.
+    - Fill in the actual values for your local setup in the `.env` file.
+    ### `.env-example`
+
+   The `.env-example` file contains examples of the required environment variables:
+   
+   ```plaintext
+    SECRET_KEY=enter_yor_key
+    DEBUG=on
+    DATABASE_URL=postgres://db_user:db_password@db/db_name
+   ```
+   
+4. **Start project:**
 
    ### Prerequisites
 
