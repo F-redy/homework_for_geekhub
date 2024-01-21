@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if perms.products.add %}
+        <div class="add-products">
+            <!-- messages -->
+            {% include 'inc/messages.html' %}
+
+            <h1>Add Product IDs</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="button-add-products" type="submit" value="Add Products">
+            </form>
+        </div>
+    {% endif %}
+
+{% endblock %}

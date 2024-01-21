@@ -1,0 +1,119 @@
+/* detail product styles*/
+.wrapper-product {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(5, 27, 140, 0.24);
+}
+
+.wrapper-img {
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper-img img {
+    width: 350px;
+    height: 400px;
+}
+
+.wrapper-product h2 {
+    text-align: center;
+}
+
+ul.product {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.product li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.product-label {
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+    width: 150px;
+}
+
+.product-info {
+    display: inline-block;
+    color: #666;
+}
+
+.product-info input, select, textarea {
+    color: #150101;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    box-shadow: 0 0 10px rgba(5, 27, 140, 0.24);
+}
+
+.product-info textarea {
+    width: 100ch;
+    height: 200px;
+    border: none;
+    box-shadow: 0 0 10px rgba(5, 27, 140, 0.24);
+}
+
+.product-info a {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.product-info a:hover {
+    color: #ff6600;
+}
+
+.wrapper-button-detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-detail, .button-detail-delete, .button-detail-basket, .button-change-product-save {
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-detail {
+    background: linear-gradient(30deg, rgba(17, 87, 7, 0.64), rgba(18, 98, 9, 0.76), rgb(57, 134, 31));
+}
+
+.button-detail-delete {
+    background: linear-gradient(30deg, rgb(101, 5, 29), rgba(236, 5, 45, 0.76), rgb(73, 3, 24));
+}
+
+.button-detail-delete:hover {
+    background-color: #a60404;
+}
+
+.button-detail-basket, .button-change-product-save {
+    background-color: green;
+}
+
+.button-detail-basket:hover, .button-change-product-save:hover {
+    background-color: #026402;
+}
+
+.button-detail:hover {
+    background-color: #005f77;
+}
+
+.align-right {
+    display: flex;
+    justify-content: end;
+}
+
+.wrapper-button-detail a {
+    text-decoration: none;
+}

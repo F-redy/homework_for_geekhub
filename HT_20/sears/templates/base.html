@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title|safe }}</title>
+    <!-- styles -->
+    {% include 'inc/styles.html' %}
+    <!-- Fonts -->
+    {% include 'inc/fonts.html' %}
+</head>
+<body>
+<div class="body-wrapper">
+    <!-- navigation -->
+    {% include "inc/navigation.html" %}
+    <!-- content -->
+    <div class="content-wrapper">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+</body>
+</html>

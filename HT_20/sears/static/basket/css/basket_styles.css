@@ -1,0 +1,161 @@
+/* Basket */
+.basket-wrapper {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.basket-title {
+    text-align: center;
+}
+
+.basket-product {
+    padding: 0;
+}
+
+.basket-item {
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+    background-color: #c9c5c5;
+    box-shadow: 0 0 10px black;
+}
+
+.product-name {
+    color: black;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product-name a {
+    color: #3d3737;
+    text-decoration: none;
+}
+
+.product-name a:hover {
+    color: #008CBA;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapper-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity {
+    width: 3em;
+    min-width: 30px;
+    height: 20px;
+    padding: 5px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.price {
+    color: #3d3737;
+    font-size: 1.5em;
+}
+
+.total-price {
+    font-size: 1.5em;
+    color: green;
+}
+
+.basket-icon {
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.basket-icon:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+}
+
+.empty-basket {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.wrapper-order {
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.39);
+}
+.order-price {
+    font-size: 1.2em;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+/* buttons baskets */
+.basket-buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.clear-basket, .order {
+    display: flex;
+}
+
+.clear-basket a, .order a {
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.clear-basket input, .order input {
+    font-size: 1em;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order a {
+    margin-left: 15px;
+}
+
+.order input {
+    background-color: #188d18;
+}
+
+.order input:hover {
+    background-color: #0d4f17;
+}
+
+.clear-basket a {
+    margin-right: 10px;
+}
+
+.clear-basket input {
+    background-color: red;
+}
+
+.clear-basket input:hover {
+    background-color: #b90217;
+}
+
+.wrapper-quantity button {
+    margin: 0 3px;
+    width: 3em;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.wrapper-quantity button:hover {
+    background-color: #bbbbbb;
+    transition: background-color 0.3s ease;
+}
