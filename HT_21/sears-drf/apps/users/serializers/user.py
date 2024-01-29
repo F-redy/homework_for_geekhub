@@ -9,3 +9,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ['id', 'username', 'email', 'is_staff']
+        read_only_fields = ['id',]

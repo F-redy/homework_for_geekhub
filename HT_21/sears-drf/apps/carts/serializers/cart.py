@@ -9,9 +9,9 @@ from apps.carts.models import Cart
 class CartSerializer(serializers.ModelSerializer):
     price = serializers.DecimalField(
         read_only=True,
+        source='product.final_price',
         max_digits=10,
-        decimal_places=2,
-        validators=[MinValueValidator(1, message=_('Price must be greater than or equal to 1'))]
+        decimal_places=2
     )
     quantity = serializers.IntegerField(
         required=True,
@@ -25,14 +25,8 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ['id', 'user', 'price', 'quantity', 'product', 'products_price']
+        read_only_fields = ['id', 'user', 'price', 'products_price']
+        write_only_fields = ['product', ]
 
     def get_products_price(self, obj):
         return obj.products_price()
-
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        if 'request' in self.context:
-            user = self.context['request'].user
-            if user.is_authenticated:
-                data['user'] = user.id
-        return data
