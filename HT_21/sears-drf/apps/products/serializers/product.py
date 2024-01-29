@@ -9,8 +9,6 @@ ERROR_MESSAGE_PRICE = 'Price must be greater than or equal to 0'
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-
     class Meta:
         base_price = serializers.DecimalField(
             max_digits=10,

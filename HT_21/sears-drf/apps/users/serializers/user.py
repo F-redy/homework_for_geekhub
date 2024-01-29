@@ -3,8 +3,8 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    is_staff = serializers.BooleanField(read_only=True)
-    email = serializers.EmailField(read_only=True)
+    is_staff = serializers.BooleanField()
+    email = serializers.EmailField()
 
     class Meta:
         model = get_user_model()
