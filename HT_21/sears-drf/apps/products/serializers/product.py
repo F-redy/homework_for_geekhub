@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from apps.products.models import Product
-from apps.products.serializers.category import CategorySerializer
 
 ERROR_MESSAGE_PRICE = 'Price must be greater than or equal to 0'
 
