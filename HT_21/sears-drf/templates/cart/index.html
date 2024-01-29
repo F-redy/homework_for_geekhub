@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load carts_tags %}
+
+
+{% block content %}
+    <div class="basket-wrapper" id="cart-items-container">
+        <!-- messages -->
+        {% include "inc/messages.html" %}
+
+        <h1 class="basket-title"> {{ title }} </h1>
+        <div class="basket-product">
+            {% user_carts request as carts %}
+
+            {% for cart in carts %}
+                <div class="basket-item">
+                    <div class="product-name">
+                        <a href="{% url 'products:detail_product' cart.product.product_id %}"
+                           id="name">{{ cart.product.name|safe }}</a>
+                    </div>
+                    <div class="product-info">
+                        <!-- Change quantity, product-info -->
+                        <div class="wrapper-quantity">
+                            <a href="{% url 'carts:cart_product_sub' cart.product.pk %}">
+                                <button class="decrement-btn" type="submit" value="decrement">-</button>
+                            </a>
+                            <form action="{% url 'carts:cart_update' cart.product.pk %}" method="POST">
+                                {% csrf_token %}
+                                <label for="quantity">
+                                    <input type="number" class="quantity" name="quantity"
+                                           value="{{ cart.quantity }}"
+                                           min="1" max="100">
+                                </label>
+                            </form>
+                            <a href="{% url 'carts:cart_product_add' cart.product.pk %}">
+                                <button class="increment-btn" type="submit">+</button>
+                            </a>
+
+                        </div>
+
+                        <div class="price"> x {{ cart.product.final_price|floatformat:2 }} $ =</div>
+                        <div class="total-price">{{ cart.products_price|floatformat:2 }} $</div>
+
+                        <div>
+                            <a href="{% url 'carts:cart_remove' cart.pk %}">
+                                <img src="{% static 'carts/icons/basket.svg' %}" alt="Basket Icon"
+                                     class="basket-icon">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <h3 class="empty-basket">No products in the basket</h3>
+            {% endfor %}
+        </div>
+    
+        <!-- Order, Clear, Total Price Cart-->
+        <div class="basket-buttons-container">
+            <div class="wrapper-order">
+                <div class="order">
+                    {% if carts %}
+                        <a href="#">
+                            <input type="submit" value="Order">
+                        </a>
+                    {% endif %}
+                    <span class="order-price">Total Quantity: {{ carts.total_quantity }}</span>
+                    <span class="order-price">Total Price: {{ carts.total_price|floatformat:2 }} $</span>
+                </div>
+            </div>
+            {% if carts %}
+                <div class="clear-basket">
+                    <a href="{% url 'carts:delete_carts' user.pk %}">
+                        <input type="submit" value="Clear Basket">
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+
+    </div>
+
+{% endblock %}

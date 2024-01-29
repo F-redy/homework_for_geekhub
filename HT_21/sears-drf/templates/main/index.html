@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="task">
+        <h1> About </h1>
+
+        <p>This is a tutorial project in Django</p>
+        <p>Get acquainted with the tasks of the project: <a href="{% url 'main:task' %}">Tasks</a></p>
+
+        <h2>Added Products Page:</h2>
+
+        <p><strong>Note:</strong> This page is accessible only to administrators.</p>
+
+        <p>This page contains a text field in which the user can enter any number of product identifiers. After
+            submitting the
+            form, a scraper is launched that collects product information from the Sears website using the entered
+            identifiers.</p>
+
+        <p>In addition, the scraping process runs in the background so as not to block the execution of the main
+            thread.</p>
+
+        <p>This architecture allows the user to add and view products and get complete information about a particular
+            product
+            without interrupting the main flow of the application.</p>
+
+        <h2>My Products Page:</h2>
+
+        <p>Here are all the products presented in the system, indicating the main parameters, such as name and
+            price.</p>
+
+        <h2>Detail-Product Page:</h2>
+
+        <p>Provides complete information about the selected product, name, price, ID, short description (in stock),
+            brand,
+            product, image product, link to the product on the Sears website, and other details.</p>
+
+        <h2>Change Product Page:</h2>
+
+        <p><strong>Note:</strong> This page is accessible only to administrators.</p>
+
+        <p>This page allows administrators to modify the details of a product in the system. Administrators can update
+            information
+            such as the product's name, price, category, brand, and other relevant details.</p>
+
+        <h2>Basket Page:</h2>
+
+        <p><strong>Note:</strong> This page is accessible only to authenticated users.</p>
+
+        <p>All products added by the user to the cart are presented here, indicating the main parameters, such as name,
+            price,
+            quantity. On the page, you can change the number of products, delete one of the products, and empty the
+            entire cart
+            of products.</p>
+
+        <h2>Categories Page:</h2>
+
+        <p>This page displays a list of available product categories. Clicking on a specific category will show a page
+            with
+            products only from that category.</p>
+
+        <h2>Sign in Page:</h2>
+
+        <p>The sign-in page allows users to log in to their accounts.</p>
+
+        <h2>Sign up Page:</h2>
+
+        <p>The sign-up page is used for creating new user accounts.</p>
+
+        <h2>User Profile Page:</h2>
+
+        <p>The user profile page provides information and settings related to a user's account.</p>
+
+        <h2>Change Password Page:</h2>
+
+        <p>The change password page allows users to update their account passwords.</p>
+
+
+    </div>
+
+{% endblock %}
