@@ -8,7 +8,7 @@ from apps.users.serializers.user import UserSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
-    http_method_names = ['get', 'post', 'put', 'patch', 'delete']
+    http_method_names = ['get', 'put', 'patch', 'delete']
 
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:

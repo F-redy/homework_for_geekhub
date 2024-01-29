@@ -7,7 +7,6 @@ from apps.carts.models import Cart
 
 
 class CartSerializer(serializers.ModelSerializer):
-    user = serializers.SlugRelatedField(read_only=True, slug_field='username')
     price = serializers.DecimalField(
         read_only=True,
         max_digits=10,
@@ -21,14 +20,14 @@ class CartSerializer(serializers.ModelSerializer):
             MaxValueValidator(100, message=_('Quantity must be less than or equal to 100'))
         ]
     )
-    total_price = serializers.SerializerMethodField(read_only=True)
+    products_price = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Cart
-        fields = ['id', 'user', 'price', 'quantity', 'product', 'total_price']
+        fields = ['id', 'user', 'price', 'quantity', 'product', 'products_price']
 
-    def get_total_price(self, obj):
-        return obj.get_total_price()
+    def get_products_price(self, obj):
+        return obj.products_price()
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

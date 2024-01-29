@@ -8,4 +8,4 @@ class CartViewSet(ModelViewSet):
     serializer_class = CartSerializer
 
     def get_queryset(self):
-        return Cart.objects.filter(user=self.request.user).select_related('user')
+        return Cart.objects.filter(user=self.request.user).select_related('user', 'product')

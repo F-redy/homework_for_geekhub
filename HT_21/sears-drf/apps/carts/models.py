@@ -8,12 +8,6 @@ from apps.common.models import TimestampMixin
 from apps.products.models import Product
 
 
-# class CartQuerySet(models.QuerySet):
-#     def total_price(self):
-#         return sum(cart.get_total_price() for cart in self)
-#
-#     def total_quantity(self):
-#         return sum(cart.quantity for cart in self) if self else 0
 class CartQuerySet(models.QuerySet):
     def total_price(self):
         return self.aggregate(total_price=Sum(F('product__final_price') * F('quantity')))['total_price'] or 0
@@ -49,7 +43,7 @@ class Cart(TimestampMixin, models.Model):
     objects = CartQuerySet.as_manager()
 
     def __str__(self):
-        return f'{self.user.username} | {self.product.name} | {self.quantity}'
+        return f'{self.user } | {self.product.name} | {self.quantity}'
 
     def products_price(self):
         return round(float(self.product.final_price * self.quantity), 2)
