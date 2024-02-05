@@ -1,0 +1,19 @@
+{% load static %}
+
+{% if messages %}
+    <ul class="messages" id="messages-container">
+        {% for message in messages %}
+            <li id="jq-notification"{% if message.tags %} class="{{ message.tags }}">{% endif %}
+            {{ message }}
+            <span class="close-message" onclick="closeMessage(this)">&times;</span>
+            </li>
+
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+
+{% block javascript %}
+    <script src="{% static 'main/js/messages.js' %}"></script>
+{% endblock %}

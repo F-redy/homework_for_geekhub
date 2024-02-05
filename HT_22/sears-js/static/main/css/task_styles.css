@@ -1,0 +1,38 @@
+/* task styles */
+.task {
+    width: 80%;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    margin-top: 10px;
+}
+
+
+.task a {
+    padding: 0 5px;
+    text-decoration: none;
+    color: #0a0a0a;
+    background-color: rgba(33, 66, 234, 0.09);
+    border-radius: 5px;
+    transition: color 0.3s;
+}
+
+.task a:hover {
+    color: #ff6600;
+    background-color: rgb(255, 255, 255);
+}
+
+.task-box {
+    margin: 15px;
+    padding: 10px;
+    box-shadow: 0 0 10px #0e0000;
+    border-radius: 10px;
+}
+.task-box ul {
+    list-style-type: square;
+}
+
+.task-box-title {
+    text-align: center;
+    font-weight: bold;
+}

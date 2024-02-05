@@ -1,0 +1,28 @@
+/* add products ids */
+.text-products {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.button-add-products {
+    display: flex;
+    margin-left: auto;
+    margin-right: -20px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    background: linear-gradient(30deg, rgba(17, 87, 7, 0.64), rgba(18, 98, 9, 0.76), rgb(57, 134, 31));
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.5s ease;
+}
+
+.button-add-products:hover {
+    color: black;
+    background: linear-gradient(30deg, rgba(15, 136, 10, 0.64), rgba(59, 252, 41, 0.76), rgb(64, 238, 5));
+}

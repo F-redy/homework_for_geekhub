@@ -1,0 +1,103 @@
+{% load static %}
+
+<p class="alert jq-notification"> {{ notification }}</p>
+
+<h1 class="basket-title"> {{ title|default:'Cart' }} </h1>
+<div class="basket-product">
+
+    {% for cart in carts %}
+        <div class="basket-item" data-product-id="{{ cart.product.pk }}">
+            <div class="product-name">
+                <a href="{% url 'products:detail_product' cart.product.product_id %}"
+                   id="name">{{ cart.product.name|safe }}</a>
+            </div>
+            <div class="product-info">
+                <!-- Change quantity, product-info -->
+                <div class="wrapper-quantity">
+                    <button class="decrement-btn" type="button"
+                            data-product-url="{% url 'carts:cart_update' cart.product.pk %}"
+                            data-action="sub" data-quantity="{{ cart.quantity }}">
+                        -
+                        {% csrf_token %}
+                    </button>
+
+                    <label for="quantity">
+                        <input type="number" class="quantity" name="quantity"
+                               data-product-url="{% url 'carts:cart_update' cart.product.pk %}"
+                               data-action="update"
+                               data-quantity="{{ cart.quantity }}"
+                               value="{{ cart.quantity }}"
+                               min="0" max="100">
+                        {% csrf_token %}
+                    </label>
+
+                    <button class="increment-btn" type="button"
+                            data-product-url="{% url 'carts:cart_update' cart.product.pk %}"
+                            data-action="add" data-quantity="{{ cart.quantity }}">
+                        {% csrf_token %}
+                        +
+                    </button>
+
+                </div>
+
+                <div class="price">
+                    x {{ cart.product.final_price|floatformat:2 }} $ =
+                </div>
+                <div class="products_price">
+                    <span class="jq-products-price">{{ cart.products_price|floatformat:2 }}</span> $
+                </div>
+
+                <span data-cart-url="{% url 'carts:cart_remove' cart.id %}" class="remove-from-cart">
+                    {% csrf_token %}
+                    <img src="{% static 'carts/icons/cart.svg' %}" alt="Basket Icon" class="basket-icon">
+                </span>
+            </div>
+        </div>
+    {% empty %}
+        <div class="empty-cart">
+            <img src="{% static 'carts/images/empty_cart.png' %}" alt="Empty Cart">
+            <h3>No products in the cart</h3>
+        </div>
+
+    {% endfor %}
+</div>
+
+<!-- Order, Clear, Total Price Cart-->
+<div class="basket-buttons-container">
+    <div class="wrapper-order">
+        <div class="order">
+            {% if carts %}
+                <a href="#">
+                    <input type="submit" value="Order">
+                </a>
+            {% endif %}
+            <span class="order-price">
+                Total Quantity:
+                <span id="jq-total-quantity" data-total-quantity="{{ total_quantity }}">{{ total_quantity }}
+                    {% csrf_token %}
+                </span>
+            </span>
+            <span class="order-price">
+                Total Price:
+                <span id="jq-total-price" data-total-price="{{ total_price }}">{{ total_price|floatformat:2 }}
+                    {% csrf_token %}
+                </span> $
+            </span>
+        </div>
+    </div>
+
+    {% if carts %}
+        <div class="clear-basket">
+            <a data-delete-url="{% url 'carts:cart_clear' %}" id="clear-basket">
+                {% csrf_token %}
+                <input type="button" value="Clear Basket">
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+
+
+{% block javascript %}
+    <script src="{% static 'carts/js/cart.js' %}"></script>
+{% endblock %}

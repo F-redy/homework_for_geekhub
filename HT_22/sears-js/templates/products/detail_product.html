@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="wrapper-product">
+        <!-- messages -->
+        {% include 'inc/messages.html' %}
+        <p class="alert jq-notification"> {{ notification }}</p>
+
+        <h2>{{ title|safe }}</h2>
+
+        <div class="wrapper-img">
+            <img src="{{ product.image_url }}" alt="Image Description">
+        </div>
+        <ul class="product">
+            <li>
+                <span class="product-label">Link:</span>
+                <span class="product-info"><a href="{{ product.url }}" target="_blank">click here</a></span>
+            </li>
+            <li>
+                <span class="product-label">ID:</span>
+                <span class="product-info">{{ product.product_id }}</span>
+            </li>
+            <li>
+                <span class="product-label">Name:</span>
+                <span class="product-info">{{ product.name|safe }}</span>
+            </li>
+            <li>
+                <span class="product-label">Brand:</span>
+                <span class="product-info">{{ product.brand|safe }}</span>
+            </li>
+            <li>
+                <span class="product-label">Category:</span>
+                <span class="product-info">{{ product.category }}</span>
+            </li>
+
+            {% if product.base_price != product.final_price %}
+                <li>
+                    <span class="product-label">Base Price:</span>
+                    <span class="product-info">{{ product.base_price }} $</span>
+                </li>
+                <li>
+                    <span class="product-label">Final Price:</span>
+                    <span class="product-info">{{ product.final_price }} $</span>
+                </li>
+            {% else %}
+                <li>
+                    <span class="product-label">Base Price:</span>
+                    <span class="product-info">{{ product.base_price }} $</span>
+                </li>
+            {% endif %}
+
+            {% if product.savings_price %}
+                <li>
+                    <span class="product-label">Savings Price:</span>
+                    <span class="product-info">{{ product.savings_price }} $</span>
+                </li>
+            {% endif %}
+            <li>
+                <span class="product-label">Last Update</span>
+                <span class="product-info">{{ product.updated_at }}</span>
+            </li>
+            <li>
+                <span class="product-label">Description:</span>
+                <span class="product-info">{{ product.short_description|safe }}</span>
+            </li>
+        </ul>
+
+        <div class="{% if perms.products.change %}wrapper-button-detail{% else %}align-right{% endif %}">
+            {% if user.is_authenticated %}
+                {% if user.is_superuser or perms.products.change %}
+                    <form method="post" action="{% url 'products:delete_product' pk=product.pk %}">
+
+                        {% csrf_token %}
+                        <input class="button-detail-delete" type="submit" value="Delete">
+                    </form>
+
+                    <a href="{% url 'products:change_product' product.product_id %}">
+                        <input class="button-detail" type="button" value="Change Product">
+                    </a>
+                    <a href="{% url 'products:update_product' product.product_id %}">
+                        <input class="button-detail" type="submit" value="Update From Sears">
+                    </a>
+
+                {% endif %}
+
+                <a data-add-product-url="{% url 'carts:cart_add' product.pk %}" class="add-to-cart" id="add-to-cart">
+                    {% csrf_token %}
+                    <input class="button-detail-basket" type="button" value="Add To Basket">
+                </a>
+
+
+            {% endif %}
+        </div>
+    </div>
+
+
+
+{% endblock %}

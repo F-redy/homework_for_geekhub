@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="task">
+
+        {% for task in tasks_list %}
+            <div class="task-box">
+                <h2 class="task-box-title">{{ task.title }}</h2>
+                {{ task.description|safe }}
+                {% if task.notes %}
+                    <h4>Notes:</h4>
+                    {{ task.notes|safe }}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
