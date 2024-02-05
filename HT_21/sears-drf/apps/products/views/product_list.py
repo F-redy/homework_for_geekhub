@@ -12,6 +12,7 @@ class ProductListView(ListView):
     template_name = 'products/products.html'
     context_object_name = 'products_list'
     paginate_by = 20
+    extra_context = {'title': _('My Products')}
 
     def get_queryset(self):
         slug = self.kwargs.get('cat_slug')
@@ -29,7 +30,5 @@ class ProductListView(ListView):
             category = get_object_or_404(Category, slug=slug)
             context['title'] = _(f'Products By Category: {category.name}')
             context['category'] = _(category.name)
-        else:
-            context.setdefault('title', _('My Products'))
 
         return context

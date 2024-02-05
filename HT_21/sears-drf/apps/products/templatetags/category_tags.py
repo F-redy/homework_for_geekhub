@@ -10,9 +10,9 @@ register = template.Library()
 @register.simple_tag()
 def show_categories():
     return (Category.objects
-            .annotate(total_products=Count('products'))
-            .filter(total_products__gte=3)
-            .order_by('-total_products')
+            .annotate(total_products_count=Count('products'))
+            .filter(total_products_count__gte=5)
+            .order_by('-total_products_count')
             )
 
 

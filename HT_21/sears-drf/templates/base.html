@@ -4,7 +4,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title|safe }}</title>
+    {% block title %}
+        <title>{{ title|safe }}</title>
+    {% endblock %}
     <!-- styles -->
     {% include 'inc/styles.html' %}
     <!-- Fonts -->
@@ -19,6 +21,11 @@
         {% block content %}{% endblock %}
     </div>
 </div>
+
+<!-- js -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="{% static 'carts/js/cart.js' %}"></script>
+{% block javascript %}{% endblock %}
 
 </body>
 </html>

@@ -6,20 +6,20 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from apps.products.views import ACCESS_IS_DENIED
+from apps.products.views import ACCESS_DENIED_MESSAGE
 
-SUCCESS_MESSAGE = _('Re-scraping started. Wait a couple of seconds...')
-ERROR_MESSAGE = _('Oops...Scraping Process Invalid')
+RESCRAPE_STARTED_MESSAGE = 'Re-scraping started. Please wait...'
+SCRAPE_ERROR_MESSAGE = 'Oops... Scrape Process Failed'
 
 
 def update_product(request, product_id):
     if not request.user.is_superuser:
-        messages.error(request, ACCESS_IS_DENIED)
+        messages.error(request, _(ACCESS_DENIED_MESSAGE))
         return redirect('products:my_products')
     try:
         Popen([sys.executable, 'services/products/subscraper.py', product_id])
-        messages.success(request, SUCCESS_MESSAGE)
+        messages.success(request, _(RESCRAPE_STARTED_MESSAGE))
     except Exception:
-        messages.error(request, ERROR_MESSAGE)
+        messages.error(request, _(SCRAPE_ERROR_MESSAGE))
 
     return redirect(reverse('products:detail_product', kwargs={'product_id': product_id}))

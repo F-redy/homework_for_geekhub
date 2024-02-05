@@ -6,16 +6,16 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import UpdateView
 
 from apps.products.models import Product
-from apps.products.views import ACCESS_IS_DENIED
+from apps.products.views import ACCESS_DENIED_MESSAGE
 
-SUCCESS_MESSAGE_FORM = _('Product was success updated.')
+PRODUCT_UPDATE_SUCCESS_MESSAGE = 'Product successfully updated.'
 
 
 class UpdateProductsView(PermissionRequiredMixin, UpdateView):
     model = Product
     template_name = 'products/update_product.html'
     fields = ['name', 'brand', 'category', 'base_price', 'final_price', 'savings_price', 'short_description']
-    permission_denied_message = ACCESS_IS_DENIED
+    permission_denied_message = _(ACCESS_DENIED_MESSAGE)
     permission_required = 'products.change_product'
 
     def get_object(self, queryset=None):
@@ -29,5 +29,5 @@ class UpdateProductsView(PermissionRequiredMixin, UpdateView):
         return redirect('products:my_products')
 
     def form_valid(self, form):
-        messages.success(self.request, SUCCESS_MESSAGE_FORM)
+        messages.success(self.request, _(PRODUCT_UPDATE_SUCCESS_MESSAGE))
         return super(UpdateProductsView, self).form_valid(form)

@@ -1,18 +1,27 @@
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 
-from apps.carts.models import Cart
+from apps.carts.utils import get_completed_cart_page
+from apps.carts.utils import get_user_carts
+
+SUCCESSES_DELETE_CART_MESSAGE = 'The product was successfully removed from the cart.'
 
 
 @login_required
 def cart_remove(request, cart_id):
-    cart = get_object_or_404(Cart, pk=cart_id)
-    if cart:
-        product_id = cart.product.product_id
-        cart.delete()
-        messages.success(request, _(f'Deleted {product_id} from cart.'))
+    if request.method == 'DELETE':
 
-    return redirect(request.META.get('HTTP_REFERER'))
+        user_carts = get_user_carts(request)
+        if user_carts.exists():
+            cart = user_carts.filter(pk=cart_id).first()
+            cart.delete()
+            response_data = {
+                'notification': _(SUCCESSES_DELETE_CART_MESSAGE),
+                'success': True,
+                'cart_items_html': get_completed_cart_page(request, user_carts),
+            }
+
+            return JsonResponse(response_data)
+    return redirect('products:my_products')

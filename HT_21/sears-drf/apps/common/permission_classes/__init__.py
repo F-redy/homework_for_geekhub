@@ -1,1 +1,0 @@
-from apps.common.permission_classes.is_admin_or_read_only import IsAdminOrReadOnly

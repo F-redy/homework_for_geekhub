@@ -1,19 +1,15 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
-from django.db.models import F
-from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import TimestampMixin
 from apps.products.models import Product
 
-
-class CartQuerySet(models.QuerySet):
-    def total_price(self):
-        return self.aggregate(total_price=Sum(F('product__final_price') * F('quantity')))['total_price'] or 0
-
-    def total_quantity(self):
-        return self.aggregate(total_quantity=Sum('quantity'))['total_quantity'] or 0
+MIN_QUANTITY = 0
+MAX_QUANTITY = 100
+ERROR_QUANTITY_MESSAGE = f'The quantity must be between {MIN_QUANTITY} and {MAX_QUANTITY}.'
 
 
 class Cart(TimestampMixin, models.Model):
@@ -24,13 +20,18 @@ class Cart(TimestampMixin, models.Model):
         null=True,
         verbose_name=_('user')
     )
-    product = models.ForeignKey(
+    product = models.OneToOneField(
         to=Product,
         on_delete=models.CASCADE,
+        unique=True,
         verbose_name=_('product')
     )
     quantity = models.PositiveSmallIntegerField(
-        default=0,
+        default=MIN_QUANTITY,
+        validators=[
+            MinValueValidator(MIN_QUANTITY, message=_(ERROR_QUANTITY_MESSAGE)),
+            MaxValueValidator(MAX_QUANTITY, message=_(ERROR_QUANTITY_MESSAGE))
+        ],
         verbose_name=_('quantity')
     )
     session_key = models.CharField(
@@ -40,10 +41,8 @@ class Cart(TimestampMixin, models.Model):
         verbose_name=_('session key')
     )
 
-    objects = CartQuerySet.as_manager()
-
     def __str__(self):
-        return f'{self.user } | {self.product.name} | {self.quantity}'
+        return f'{self.user} | {self.product} | {self.quantity}'
 
     def products_price(self):
         return round(float(self.product.final_price * self.quantity), 2)

@@ -13,4 +13,4 @@ class CategoryListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Category.objects.annotate(total_products=Count('products')).order_by('-total_products')
+        return Category.objects.annotate(total_products_count=Count('products')).order_by('-total_products_count')

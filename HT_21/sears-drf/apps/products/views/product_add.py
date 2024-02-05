@@ -9,17 +9,17 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import FormView
 
 from apps.products.forms import AddProductForm
-from apps.products.views import ACCESS_IS_DENIED
+from apps.products.views import ACCESS_DENIED_MESSAGE
 
-SUCCESS_MESSAGE_FORM = _('Data processing. It can take some time...')
-ERROR_MESSAGE_FORM = _('Error: Scraping Process Invalid')
+PROCESSING_MESSAGE = 'Data processing. It can take some time...'
+SCRAPE_ERROR_MESSAGE = 'Error: Scraping Process Invalid'
 
 
 class AddProductsFormView(PermissionRequiredMixin, FormView):
     template_name = 'products/add_product.html'
     form_class = AddProductForm
     success_url = reverse_lazy('products:add_products')
-    permission_denied_message = ACCESS_IS_DENIED
+    permission_denied_message = _(ACCESS_DENIED_MESSAGE)
     permission_required = 'products.add_products'
 
     def get_context_data(self, **kwargs):
@@ -31,9 +31,9 @@ class AddProductsFormView(PermissionRequiredMixin, FormView):
         product_ids = form.cleaned_data['user_input']
         try:
             Popen([sys.executable, 'services/products/subscraper.py', product_ids])
-            messages.success(self.request, SUCCESS_MESSAGE_FORM)
+            messages.success(self.request, _(PROCESSING_MESSAGE))
         except Exception:
-            messages.error(self.request, ERROR_MESSAGE_FORM)
+            messages.error(self.request, _(SCRAPE_ERROR_MESSAGE))
 
         return super(AddProductsFormView, self).form_valid(form)
 

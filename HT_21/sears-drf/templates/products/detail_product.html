@@ -5,6 +5,7 @@
     <div class="wrapper-product">
         <!-- messages -->
         {% include 'inc/messages.html' %}
+        <p class="alert jq-notification"> {{ notification }}</p>
 
         <h2>{{ title|safe }}</h2>
 
@@ -73,9 +74,7 @@
                         {% csrf_token %}
                         <input class="button-detail-delete" type="submit" value="Delete">
                     </form>
-                    {#                    <a href="{% url 'products:detail_product' product.product_id %}">#}
-                    {#                        <input class="button-detail-delete" type="button" value="Delete">#}
-                    {#                    </a>#}
+
                     <a href="{% url 'products:change_product' product.product_id %}">
                         <input class="button-detail" type="button" value="Change Product">
                     </a>
@@ -85,7 +84,7 @@
 
                 {% endif %}
 
-                <a href="{% url 'carts:cart_add' product.pk %}" data-product-id="{{ product.pk }}" class="add-to-cart">
+                <a data-add-product-url="{% url 'carts:cart_add' product.pk %}" class="add-to-cart" id="add-to-cart">
                     {% csrf_token %}
                     <input class="button-detail-basket" type="button" value="Add To Basket">
                 </a>
