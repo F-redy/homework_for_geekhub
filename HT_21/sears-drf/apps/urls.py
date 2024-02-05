@@ -25,10 +25,10 @@ from apps.main.views import page_not_found
 from settings import main
 
 api = [
-    path('', include('apps.products.api_urls', namespace='api_products')),
-    path('cart/', include('apps.carts.api_urls', namespace='api_carts')),
+    path('', include('apps.products.api.urls', namespace='api_products')),
+    path('cart/', include('apps.carts.api.urls', namespace='api_carts')),
 
-    path('users/', include('apps.users.api_urls', namespace='api_users')),
+    path('users/', include('apps.users.api.urls', namespace='api_users')),
 ]
 
 urlpatterns = [

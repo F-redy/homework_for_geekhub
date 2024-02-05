@@ -1,18 +1,19 @@
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
+{% load static %}
 
+{% if messages %}
+    <ul class="messages" id="messages-container">
+        {% for message in messages %}
             <li id="jq-notification"{% if message.tags %} class="{{ message.tags }}">{% endif %}
             {{ message }}
+            <span class="close-message" onclick="closeMessage(this)">&times;</span>
             </li>
 
-            <span class="close-message" onclick="closeMessage(this)">&times;</span>
         {% endfor %}
     </ul>
 {% endif %}
 
-<script>
-    function closeMessage(element) {
-        element.parentElement.style.display = 'none';
-    }
-</script>
+
+
+{% block javascript %}
+    <script src="{% static 'main/js/messages.js' %}"></script>
+{% endblock %}

@@ -8,6 +8,10 @@
     margin: 5px auto;
 }
 
+.messages li {
+    margin: 5px;
+}
+
 .close-message {
     color: rgba(16, 15, 15, 0.68);
     font-weight: bold;
@@ -19,7 +23,6 @@
 }
 
 .success {
-
     padding: 15px 20px;
     background: linear-gradient(30deg, rgba(33, 121, 15, 0.8), rgba(21, 129, 8, 0.76), rgb(18, 110, 4));
     border-radius: 10px;
@@ -32,44 +35,31 @@
     border-radius: 10px
 }
 
-/*!* Общие стили для блока оповещения *!*/
-/*.alert {*/
-/*    position: fixed;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
-/*    transform: translate(-50%, -50%);*/
-/*    z-index: 3;*/
-/*    color: #ffffff;*/
-/*    padding: 15px;*/
-/*    border: 1px solid #ced4da; !* Цвет границы *!*/
-/*    border-radius: 10px;*/
-/*    margin-bottom: 1rem; !* Отступ снизу *!*/
-/*}*/
 
-/*!* Стили для блока оповещения с успешным статусом *!*/
-/*.alert-success {*/
-/*    !*color: #ffffff; !* Цвет текста для успешного статуса *!*!*/
-/*    background: linear-gradient(30deg, rgba(33, 121, 15, 0.8), rgba(21, 129, 8, 0.76), rgb(18, 110, 4));*/
-/*    border-color: #c3e6cb; !* Цвет границы для успешного статуса *!*/
-/*}*/
+/* Общие стили для блока оповещения */
+.alert {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    color: #ffffff;
+    padding: 15px;
+    margin-bottom: 1rem;
+}
+.alert-success, .alert-error {
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
 
-/*.alert-error {*/
-/*    background-color: red;*/
-/*    border-color: #c3e6cb; !* Цвет границы для успешного статуса *!*/
-/*}*/
 
-/*!* Плавное появление/исчезновение *!*/
-/*.fade {*/
-/*    opacity: 0; !* По умолчанию элемент прозрачен *!*/
-/*    transition: opacity 0.15s linear; !* Плавное изменение прозрачности в течение 0.15 секунд *!*/
-/*}*/
+.alert-success {
+    background: linear-gradient(30deg, rgba(33, 121, 15, 0.8), rgba(21, 129, 8, 0.76), rgb(18, 110, 4));
+    border-color: #c3e6cb;
+}
 
-/*!* Видимость элемента *!*/
-/*.show {*/
-/*    opacity: 1; !* Сделайте элемент видимым, установив прозрачность в 1 *!*/
-/*}*/
-
-/*!* Ваши пользовательские стили для тени *!*/
-/*.custom-shadow {*/
-/*    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); !* Пример: тень смещена на 0 по горизонтали, на 0.5rem по вертикали, с радиусом размытия 1rem и цветом rgba(0, 0, 0, 0.15) *!*/
-/*}*/
+.alert-error {
+    background-color: red;
+    border-color: #c3e6cb;
+}

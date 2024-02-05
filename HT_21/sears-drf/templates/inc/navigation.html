@@ -20,7 +20,7 @@
                     {% for cat in categories %}
                         <li>
                             <a href="{{ cat.get_absolute_url }}">{{ cat.name }}
-                                <snap class="category-counter">{{ cat.total_products }}</snap>
+                                <snap class="category-counter">{{ cat.total_products_count }}</snap>
                             </a>
                         </li>
                     {% endfor %}

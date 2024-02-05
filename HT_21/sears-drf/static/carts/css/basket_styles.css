@@ -1,4 +1,4 @@
-/* Basket */
+/* Cart */
 .basket-wrapper {
     width: 80%;
     margin: 0 auto;
@@ -61,7 +61,7 @@
     font-size: 1.5em;
 }
 
-.total-price {
+.products_price {
     font-size: 1.5em;
     color: green;
 }
@@ -78,9 +78,14 @@
     transform: scale(1.1);
 }
 
-.empty-basket {
+.empty-cart {
     padding-top: 50px;
+    left: auto;
     text-align: center;
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .wrapper-order {

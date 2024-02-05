@@ -1,1 +1,1 @@
-from apps.users.api_views.user import UserViewSet
+from apps.users.api.views.user import UserListView

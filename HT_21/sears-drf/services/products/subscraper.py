@@ -1,3 +1,5 @@
+from sqlite3 import IntegrityError
+
 if __name__ == "__main__":
     import sys
     from pathlib import Path
@@ -27,24 +29,35 @@ logger.add('logs/errors_log.json',
            serialize=True)
 
 
+def parse_response(response: str) -> list[str]:
+    replacements = [';', ',', ' ', '\n\n', '\r']
+
+    for char in replacements:
+        if char in response:
+            response = response.replace(char, '\n').strip()
+    return response.split('\n')
+
+
 def get_product_ids():
     if len(sys.argv) > 1:
-        for id_ in sys.argv[1].split('\r'):
+        response = parse_response(sys.argv[1])
+
+        for id_ in response:
             if id_.strip():
-                yield id_.strip('\n')
+                yield id_.strip('\n').strip()
 
 
 def scraper_process(item):
-    scraper = ScraperSears()
-    product = scraper.scrape(item)
-
     try:
+        scraper = ScraperSears()
+        product = scraper.scrape(item)
+
         if product:
             Product.objects.update_or_create(product_id=product.product_id, defaults=asdict(product))
             logger.info(f'scraped "{item}" - OK')
     except AttributeError as e:
         logger.error(e)
-    except Exception as e:
+    except IntegrityError as e:
         logger.error(e)
 
 
