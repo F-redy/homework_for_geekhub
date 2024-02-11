@@ -8,7 +8,7 @@
 2. **Navigate to the project directory:**
 
    ```bash
-    cd homework_for_geekhub/HT_22/sears
+    cd homework_for_geekhub/HT_22/sears-js
     ```
 3. **Create a virtual environment:**
    For Windows:
