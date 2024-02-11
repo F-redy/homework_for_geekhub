@@ -8,7 +8,7 @@
 2. **Navigate to the project directory:**
 
    ```bash
-    cd homework_for_geekhub/HT_21/sears
+    cd homework_for_geekhub/HT_21/sears-drf
     ```
 3. **Create a virtual environment:**
    For Windows:
