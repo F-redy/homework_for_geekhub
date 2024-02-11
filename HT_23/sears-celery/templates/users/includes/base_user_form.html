@@ -1,0 +1,47 @@
+<div class="wrapper-users">
+    <!-- messages -->
+    {% include 'inc/messages.html' %}
+    <h1>{{ title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="form-error">{{ form.non_field_errors }}</div>
+        <div class="users-form">
+
+            {% for f in form %}
+                <div>
+                    <p class="user-label"><label for="{{ f.id_for_label }}">{{ f.label }}</label></p>
+                    <p>{{ f }}</p>
+                </div>
+                <div class="form-error">{{ f.errors|linebreaks }}</div>
+            {% endfor %}
+
+            <div class="users-button">
+                {% if user_page == "login" %}
+                    <button type="submit">Login</button>
+                    <div class="last-button">
+                        <a href="{% url 'users:registration' %}">
+                            <span>Don't have an account?</span> Create an account
+                        </a>
+                    </div>
+                {% elif user_page == "registration" %}
+                    <button type="submit">Registration</button>
+                    <div class="last-button">
+                        <a href="{% url 'users:login' %}">
+                            <span>Already have an account?</span> Sign in
+                        </a>
+                    </div>
+                {% elif user_page == "profile" %}
+                    <button type="submit">Save</button>
+                    <div class="last-button">
+                        <a href="{% url 'users:change_password' %}">Change Password</a>
+                    </div>
+                {% elif user_page == "change-password" %}
+                    <button type="submit">Save</button>
+                {% endif %}
+            </div>
+
+        </div>
+    </form>
+</div>

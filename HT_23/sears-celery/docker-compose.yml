@@ -1,0 +1,31 @@
+version: "3.4"
+
+volumes:
+  redis:
+    driver: local
+
+x-base: &base-backend
+  build: .
+  volumes:
+    - .:/code:delegated
+  depends_on:
+    - redis
+
+services:
+  backend:
+    <<: *base-backend
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+
+  redis:
+    image: library/redis:6.0
+    volumes:
+      - redis:/data
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+
+  worker:
+    <<: *base-backend
+    command: celery -A apps worker -l INFO

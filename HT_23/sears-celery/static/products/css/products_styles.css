@@ -1,0 +1,36 @@
+/* product table styles */
+.products-wrapper {
+    max-width: 100%;
+}
+
+table.products {
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table.products th, td {
+    padding: 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+table.products th, td {
+    background-color: #f2f2f2;
+}
+
+table.products a {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    transition: color 0.3s, transform 0.3s;
+}
+
+table.products td a:hover {
+    color: #b07b08;
+    transform: scale(1.05);
+}
+
+
+table.products th a:hover {
+    color: #0846b0;
+    transform: scale(1.2);
+}

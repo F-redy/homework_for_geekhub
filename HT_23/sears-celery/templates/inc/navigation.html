@@ -1,0 +1,58 @@
+{% load category_tags %}
+
+
+<div class="menu-wrapper">
+    <ul class="menu">
+        <li><a href="{% url 'products:my_products' %}">My Products</a></li>
+
+        {% if user.is_superuser %}
+            <li><a href="{% url 'products:add_products' %}">Add Products</a></li>
+            <li><a href="{% url 'admin:index' %}" target="_blank">Admin Site</a></li>
+        {% endif %}
+
+        <li class="dropdown">
+            <a href="{% url 'products:categories' %}">Categories</a>
+
+            {% show_categories as categories %}
+            {% if categories %}
+                <ul class="dropdown-content">
+                    <li><a href="{% url 'products:my_products' %}">All Products</a></li>
+                    {% for cat in categories %}
+                        <li>
+                            <a href="{{ cat.get_absolute_url }}">{{ cat.name }}
+                                <snap class="category-counter">{{ cat.total_products_count }}</snap>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+        </li>
+
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'carts:show_carts' %}">Cart</a></li>
+        {% endif %}
+
+        <div class="user-section">
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'users:profile' %}">
+                        {% if user.username %}
+                            {{ user.username|title }}
+                        {% else %}
+                            {{ user.email }}
+                        {% endif %}
+                    </a> |
+                    <a href="{% url 'users:logout' %}">Sign out</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'users:login' %}">Sign in</a> | <a href="{% url 'users:registration' %}">Sign up</a>
+                </li>
+            {% endif %}
+        </div>
+
+    </ul>
+
+</div>
+<div class="colored-border"></div>

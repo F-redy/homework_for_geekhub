@@ -1,0 +1,80 @@
+.wrapper-users {
+    width: 50%;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(154, 169, 239, 0.24);
+}
+
+/* Стили для полей формы */
+.users-form input {
+    width: calc(50% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: 0 0 10px rgba(1, 5, 28, 0.24);
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+/* Стили для меток полей */
+.users-form label {
+    margin: 0 28%;
+    text-align: left;
+    display: block;
+}
+
+/* Стили для кнопок */
+.users-button {
+    text-align: center;
+}
+
+.users-button a, .users-button button {
+    width: 47%;
+    background-color: green;
+    color: #ffffff;
+    padding: 10px;
+    margin: 5px 5px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.users-button a:hover, .users-button button:hover {
+    background-color: #076207;
+}
+
+.last-button {
+    width: 100%;
+    border-top: 1px solid rgba(5, 27, 140, 0.74);
+    margin-top: 20px;
+}
+
+.last-button a {
+    width: 100%;
+    margin: 10px 0 0 0;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.last-button a:hover {
+    color: #987108;
+    background-color: #ffffff;
+}
+
+.form-error {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.form-error li {
+    list-style-type: none;
+    color: #d70808;
+}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="products-wrapper">
+        <!-- messages -->
+        {% include 'inc/messages.html' %}
+
+        <h1>{{ title }}</h1>
+
+        {% if list_categories %}
+            <table class="products">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Quantity Products</th>
+                    <th>Last Update</th>
+                </tr>
+                </thead>
+                <tbody class="products-text">
+
+                {% for category in list_categories %}
+                    <tr>
+                        <td>{{ page_obj.start_index|add:forloop.counter0 }}</td>
+                        <td><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></td>
+                        <td>{{ category.total_products_count }}</td>
+                        <td>{{ category.updated_at }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h3>There are no categories yet</h3>
+        {% endif %}
+
+
+        <!-- Pagination -->
+        {% include 'inc/pagination.html' %}
+    </div>
+
+{% endblock %}
+
+
+

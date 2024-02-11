@@ -1,0 +1,65 @@
+/* messages */
+.messages {
+    position: relative;
+    list-style: none;
+    width: max-content;
+    color: #ffffff;
+    text-align: center;
+    margin: 5px auto;
+}
+
+.messages li {
+    margin: 5px;
+}
+
+.close-message {
+    color: rgba(16, 15, 15, 0.68);
+    font-weight: bold;
+    font-size: 24px;
+    position: absolute;
+    top: -3px;
+    right: 3px;
+    cursor: pointer;
+}
+
+.success {
+    padding: 15px 20px;
+    background: linear-gradient(30deg, rgba(33, 121, 15, 0.8), rgba(21, 129, 8, 0.76), rgb(18, 110, 4));
+    border-radius: 10px;
+}
+
+
+.error {
+    padding: 15px;
+    background-color: red;
+    border-radius: 10px
+}
+
+
+/* Общие стили для блока оповещения */
+.alert {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    color: #ffffff;
+    padding: 15px;
+    margin-bottom: 1rem;
+}
+.alert-success, .alert-error {
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+
+.alert-success {
+    background: linear-gradient(30deg, rgba(33, 121, 15, 0.8), rgba(21, 129, 8, 0.76), rgb(18, 110, 4));
+    border-color: #c3e6cb;
+}
+
+.alert-error {
+    background-color: red;
+    border-color: #c3e6cb;
+}
