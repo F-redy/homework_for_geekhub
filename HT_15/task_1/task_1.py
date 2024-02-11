@@ -15,7 +15,9 @@ import requests
 
 class SearsScraper:
     FIELD_NAMES = [
-        'Brand Name', 'Product Name', 'Base Price', 'Final Price', 'Savings Price', 'Category', 'Rating', 'URL'
+        'Product ID', 'Brand Name', 'Product Name',
+        'Base Price', 'Final Price', 'Savings Price',
+        'Category', 'Rating', 'URL'
     ]
     BASE_URL = 'https://www.sears.com'
     HEADERS = {
@@ -34,6 +36,8 @@ class SearsScraper:
                       'Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0',
     }
 
+    MIN_PRICE = 1000
+
     def __init__(self, catalog_id: int):
         self.catalog_id = catalog_id
         self.path_to_save = self.get_path_to_save()
@@ -50,9 +54,14 @@ class SearsScraper:
         return urljoin(self.BASE_URL, url_product)
 
     def write_to_csv(self, products):
+        file_exists = os.path.isfile(self.path_to_save)
+
         with open(f'{self.path_to_save}', 'a', newline='', encoding='utf-8') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=self.FIELD_NAMES)
-            writer.writeheader()
+
+            if not file_exists:
+                writer.writeheader()
+
             for product in products:
                 writer.writerow(product)
 
@@ -75,16 +84,23 @@ class SearsScraper:
         products = []
         try:
             for product in data['items']:
-                products.append({
-                    'Product Name': product.get('brandName'),
-                    'Brand Name': product.get('name'),
-                    'Base Price': product.get('price', dict()).get('regularPriceDisplay'),
-                    'Final Price': product.get('price', dict()).get('finalPriceDisplay'),
-                    'Savings Price': product.get('price', dict()).get('savings'),
-                    'Category': product.get('category'),
-                    'Rating': product.get('additionalAttributes', dict()).get('rating'),
-                    'URL': self.get_path_to_url_product(product.get('additionalAttributes', dict()).get('seoUrl')),
-                })
+                price = '0'
+                try:
+                    price = float(product.get('price', dict()).get('regularPrice'))
+                except ValueError:
+                    price, _ = float(price.replace('$', '').split(' - ')[1])
+                if price > self.MIN_PRICE:
+                    products.append({
+                        'Product ID': product.get('partNum'),
+                        'Product Name': product.get('brandName'),
+                        'Brand Name': product.get('name'),
+                        'Base Price': product.get('price', dict()).get('regularPriceDisplay'),
+                        'Final Price': product.get('price', dict()).get('finalPriceDisplay'),
+                        'Savings Price': product.get('price', dict()).get('savings'),
+                        'Category': product.get('category'),
+                        'Rating': product.get('additionalAttributes', dict()).get('rating'),
+                        'URL': self.get_path_to_url_product(product.get('additionalAttributes', dict()).get('seoUrl')),
+                    })
         except IndexError:
             pass
         if products:
@@ -131,5 +147,7 @@ class SearsScraper:
 
 if __name__ == '__main__':
     # scraper = SearsScraper(1020198) # Отрабатывает нормально
-    scraper = SearsScraper(1025184)  # Слишком много товаров, после 1200 ++ сервер блокирует запрос
+    # scraper = SearsScraper(1025184)  # Слишком много товаров, после 1200 ++ сервер блокирует запрос
+    scraper = SearsScraper(5008067)
+    scraper.MIN_PRICE = 300
     scraper.scrape()
