@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from urllib.parse import urljoin
 
 import requests
-
 from apps.products.models import Category
 
 

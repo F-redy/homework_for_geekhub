@@ -1,9 +1,8 @@
+from apps.products.models import Category
+from apps.products.models import Product
 from django.contrib import admin
 from django.db.models import Count
 from django.utils.html import format_html
-
-from apps.products.models import Category
-from apps.products.models import Product
 
 
 class ProductInline(admin.TabularInline):

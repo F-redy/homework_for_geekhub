@@ -1,3 +1,7 @@
+from apps.users.forms import LoginUserForm
+from apps.users.forms import ProfileUserForm
+from apps.users.forms import RegisterUserForm
+from apps.users.forms import UserPasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login
@@ -9,11 +13,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
-
-from apps.users.forms import LoginUserForm
-from apps.users.forms import ProfileUserForm
-from apps.users.forms import RegisterUserForm
-from apps.users.forms import UserPasswordChangeForm
 
 
 class RegistrationUserView(CreateView):
