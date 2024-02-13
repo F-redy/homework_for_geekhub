@@ -1,5 +1,6 @@
-from calculator import (Calculator, InvalidOperatorError,
-                        InvalidPowerOperationError)
+from calculator import Calculator
+from calculator import InvalidOperatorError
+from calculator import InvalidPowerOperationError
 
 test_data = [
     # верные данные
