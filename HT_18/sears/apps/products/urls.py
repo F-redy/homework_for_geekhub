@@ -1,9 +1,8 @@
-from django.urls import path
-
 from apps.products.views import AddProductsFormView
 from apps.products.views import ProductDetailView
 from apps.products.views import ProductListView
 from apps.products.views import task
+from django.urls import path
 
 app_name = 'products'
 

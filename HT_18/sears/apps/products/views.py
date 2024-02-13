@@ -1,6 +1,8 @@
 import sys
 from subprocess import Popen
 
+from apps.products.forms import AddProductForm
+from apps.products.models import Product
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
@@ -8,9 +10,6 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic import FormView
 from django.views.generic import ListView
-
-from apps.products.forms import AddProductForm
-from apps.products.models import Product
 
 
 class ProductListView(ListView):
