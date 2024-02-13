@@ -1,9 +1,8 @@
+from apps.products.api.serializers.category import CategorySerializer
+from apps.products.models import Category
 from django.db.models import Count
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
-
-from apps.products.api.serializers.category import CategorySerializer
-from apps.products.models import Category
 
 
 class CategoryListView(generics.ListAPIView):

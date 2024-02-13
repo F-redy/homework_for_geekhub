@@ -1,9 +1,8 @@
+from apps.products.models import Category
+from apps.products.models import Product
 from django.contrib import admin
 from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
-
-from apps.products.models import Category
-from apps.products.models import Product
 
 
 class ProductInline(admin.TabularInline):

@@ -14,8 +14,9 @@ from requests import JSONDecodeError
 
 django.setup()
 
-from apps.products.models import Product
 from scraper_sears import ScraperSears
+
+from apps.products.models import Product
 
 logger.add('logs/errors_log.json',
            filter=lambda record: record["level"].name == "ERROR",

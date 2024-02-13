@@ -1,10 +1,9 @@
+from apps.common.models import TimestampMixin
+from apps.products.models import Category
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
-from apps.common.models import TimestampMixin
-from apps.products.models import Category
 
 ERROR_PRICE_MESSAGE = 'Must be greater than or equal to {}.'
 MIN_PRICE = 1.0

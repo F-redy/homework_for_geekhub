@@ -1,7 +1,6 @@
+from apps.common.models import TimestampMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-from apps.common.models import TimestampMixin
 
 
 class Task(TimestampMixin, models.Model):

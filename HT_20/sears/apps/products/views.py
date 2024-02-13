@@ -1,9 +1,6 @@
 import sys
 from subprocess import Popen
 
-from apps.products.forms import AddProductForm
-from apps.products.models import Category
-from apps.products.models import Product
 from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Count
@@ -17,6 +14,10 @@ from django.views.generic import DetailView
 from django.views.generic import FormView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
+
+from apps.products.forms import AddProductForm
+from apps.products.models import Category
+from apps.products.models import Product
 
 ACCESS_IS_DENIED = 'Access Denied: You do not have permission to access this page.'
 

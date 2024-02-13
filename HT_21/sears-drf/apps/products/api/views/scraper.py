@@ -1,6 +1,9 @@
 import sys
 from subprocess import Popen
 
+from apps.products.api.serializers.scraper import ProductScraperSerializer
+from apps.products.views.product_add import PROCESSING_MESSAGE
+from apps.products.views.product_add import SCRAPE_ERROR_MESSAGE
 from django.utils.translation import gettext_lazy as _
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.utils import OpenApiExample
@@ -10,10 +13,6 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
-
-from apps.products.api.serializers.scraper import ProductScraperSerializer
-from apps.products.views.product_add import PROCESSING_MESSAGE
-from apps.products.views.product_add import SCRAPE_ERROR_MESSAGE
 
 
 @extend_schema(

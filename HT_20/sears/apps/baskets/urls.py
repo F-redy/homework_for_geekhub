@@ -1,5 +1,6 @@
-from apps.baskets import views
 from django.urls import path
+
+from apps.baskets import views
 
 app_name = 'baskets'
 

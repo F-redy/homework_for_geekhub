@@ -1,8 +1,7 @@
-from django.urls import path
-
 from apps.products.api.views import CategoryListView
 from apps.products.api.views import ProductList
 from apps.products.api.views import ScrapeProduct
+from django.urls import path
 
 app_name = 'api_products'
 
