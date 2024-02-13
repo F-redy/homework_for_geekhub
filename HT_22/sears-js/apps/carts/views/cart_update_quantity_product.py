@@ -1,7 +1,6 @@
+from apps.carts.utils import get_response_data
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-
-from apps.carts.utils import get_response_data
 
 
 @login_required

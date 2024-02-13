@@ -1,8 +1,7 @@
+from apps.main.models import Task
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView
-
-from apps.main.models import Task
 
 
 def index(request):

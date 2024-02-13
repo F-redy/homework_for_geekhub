@@ -1,7 +1,6 @@
-from rest_framework.viewsets import ModelViewSet
-
 from apps.carts.api.serializers import CartSerializer
 from apps.carts.models import Cart
+from rest_framework.viewsets import ModelViewSet
 
 
 class CartViewSet(ModelViewSet):
