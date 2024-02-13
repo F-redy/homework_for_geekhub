@@ -13,9 +13,8 @@ from loguru import logger
 
 django.setup()
 
-from scraper_sears import ScraperSears
-
 from apps.products.models import Product
+from scraper_sears import ScraperSears
 
 logger.add('logs/errors_log.json',
            filter=lambda record: record["level"].name == "ERROR",
