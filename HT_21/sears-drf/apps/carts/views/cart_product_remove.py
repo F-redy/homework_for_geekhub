@@ -1,9 +1,10 @@
-from apps.carts.utils import get_completed_cart_page
-from apps.carts.utils import get_user_carts
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
+
+from apps.carts.utils import get_completed_cart_page
+from apps.carts.utils import get_user_carts
 
 SUCCESSES_DELETE_CART_MESSAGE = 'The product was successfully removed from the cart.'
 

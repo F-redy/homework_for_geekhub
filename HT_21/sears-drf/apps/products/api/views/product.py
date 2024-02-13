@@ -1,7 +1,8 @@
-from apps.products.api.serializers.product import ProductSerializer
-from apps.products.models import Product
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
+
+from apps.products.api.serializers.product import ProductSerializer
+from apps.products.models import Product
 
 
 class ProductList(generics.ListAPIView):

@@ -1,10 +1,11 @@
-from apps.carts.models import Cart
-from apps.carts.models import ERROR_QUANTITY_MESSAGE
-from apps.products.models import Product
 from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
+
+from apps.carts.models import Cart
+from apps.carts.models import ERROR_QUANTITY_MESSAGE
+from apps.products.models import Product
 
 SUCCESS_UPDATE_QUANTITY_MESSAGE = 'Product quantity successfully {} in the cart.'
 

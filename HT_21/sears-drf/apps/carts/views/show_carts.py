@@ -1,9 +1,10 @@
-from apps.carts.utils import get_total_price_cart_products
-from apps.carts.utils import get_total_quantity_cart_products
-from apps.carts.utils import get_user_carts
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
+
+from apps.carts.utils import get_total_price_cart_products
+from apps.carts.utils import get_total_quantity_cart_products
+from apps.carts.utils import get_user_carts
 
 
 @login_required

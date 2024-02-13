@@ -1,10 +1,11 @@
-from apps.carts.models import Cart
-from apps.products.models import Product
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
+
+from apps.carts.models import Cart
+from apps.products.models import Product
 
 SUCCESS_ADD_PRODUCT_TO_CART_MESSAGE = 'Product successfully added to your cart.'
 
