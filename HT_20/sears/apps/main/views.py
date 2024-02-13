@@ -1,7 +1,6 @@
+from apps.main.models import Task
 from django.shortcuts import render
 from django.views.generic import ListView
-
-from apps.main.models import Task
 
 
 def index(request):

@@ -1,8 +1,7 @@
-from django import template
-from django.utils.http import urlencode
-from django.db.models import Count
-
 from apps.products.models import Category
+from django import template
+from django.db.models import Count
+from django.utils.http import urlencode
 
 register = template.Library()
 

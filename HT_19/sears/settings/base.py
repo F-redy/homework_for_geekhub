@@ -87,8 +87,16 @@ WSGI_APPLICATION = 'apps.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     "default": env.db('DATABASE_URL')
+# }
+
+# # DB FOR TESTS
 DATABASES = {
-    "default": env.db('DATABASE_URL')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
 }
 
 # Password validation

@@ -1,6 +1,5 @@
 from django.shortcuts import redirect
 from django.shortcuts import render
-
 from services.basket.basket import Basket
 from services.basket.basket import BasketManager
 
