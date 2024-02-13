@@ -1,5 +1,4 @@
-from HT_12.atm_3_0.users.db_operations.DataBaseTransaction import \
-    DataBaseTransaction
+from HT_12.atm_3_0.users.db_operations.DataBaseTransaction import DataBaseTransaction
 from HT_12.atm_3_0.users.db_operations.DataBaseUser import DataBaseUser
 
 

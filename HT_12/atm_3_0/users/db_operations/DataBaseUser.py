@@ -1,6 +1,8 @@
-from HT_12.atm_3_0.BaseDataBase import BaseDataBase, sq
-from HT_12.atm_3_0.custom_exceptions.users_exceptions import (
-    UserBalanceUpdateError, UserExistsError, UserNotFoundError)
+from HT_12.atm_3_0.BaseDataBase import BaseDataBase
+from HT_12.atm_3_0.BaseDataBase import sq
+from HT_12.atm_3_0.custom_exceptions.users_exceptions import UserBalanceUpdateError
+from HT_12.atm_3_0.custom_exceptions.users_exceptions import UserExistsError
+from HT_12.atm_3_0.custom_exceptions.users_exceptions import UserNotFoundError
 
 
 class DataBaseUser(BaseDataBase):
