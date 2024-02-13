@@ -1,12 +1,13 @@
 import sqlite3
 
-from HT_13.task_2.books.models import Author, Book
+from HT_13.task_2.books.models import Author
+from HT_13.task_2.books.models import Book
 from HT_13.task_2.categories.models import Category
 from HT_13.task_2.menu.utils import get_user_choose_menu
-from HT_13.task_2.users.custom_exceptions import (CheckoutBookError,
-                                                  IncorrectPasswordError,
-                                                  UserNotFoundError,
-                                                  ValidationError)
+from HT_13.task_2.users.custom_exceptions import CheckoutBookError
+from HT_13.task_2.users.custom_exceptions import IncorrectPasswordError
+from HT_13.task_2.users.custom_exceptions import UserNotFoundError
+from HT_13.task_2.users.custom_exceptions import ValidationError
 from HT_13.task_2.users.models import Person
 
 

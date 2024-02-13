@@ -1,8 +1,8 @@
 import sqlite3
 
-from HT_13.task_2.users.custom_exceptions import (CheckoutBookError,
-                                                  UserExistsError,
-                                                  UserNotFoundError)
+from HT_13.task_2.users.custom_exceptions import CheckoutBookError
+from HT_13.task_2.users.custom_exceptions import UserExistsError
+from HT_13.task_2.users.custom_exceptions import UserNotFoundError
 
 
 class DBUserManager:
