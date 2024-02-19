@@ -1,0 +1,8 @@
+-r base.txt
+
+django-debug-toolbar==4.2.0
+drf-spectacular-sidecar==2024.1.1
+factory_boy==3.3.0
+flake8==6.1.0
+ipython==8.19.0
+isort==5.13.2

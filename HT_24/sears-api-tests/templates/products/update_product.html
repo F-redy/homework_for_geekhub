@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="wrapper-product">
+        {% include 'inc/messages.html' %}
+
+        <h2>{{ title|safe }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <ul class="product">
+                {% for field in form %}
+                    <li>
+                        <span class="product-label">{{ field.label_tag }}</span>
+                        <span class="product-info">{{ field }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="align-right"><input class="button-change-product-save" type="submit" value="Save"></div>
+        </form>
+    </div>
+{% endblock %}

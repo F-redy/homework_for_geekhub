@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="basket-wrapper" id="cart-items-container">
+        {% include 'cart/included/cart.html' %}
+    </div>
+{% endblock %}
